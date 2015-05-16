@@ -11052,7 +11052,7 @@ img.editable-click: hover {
 	height: 55px;
 	padding-top: 3px!important;
 	padding-bottom: 5px!important;
-	background-color: #eff3f8!important;
+	/*background-color: #eff3f8!important;*/
 	border-bottom: 1px solid #e1e1e1!important;
 	border-top: 1px solid #e1e1e1!important
 }
