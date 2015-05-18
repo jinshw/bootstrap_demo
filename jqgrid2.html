@@ -22,16 +22,37 @@
     </script>
 </head>
 <body style="background-color: #ffffff;">
-    <div class="container container-fluid">
-        <div id="searchDiv">
+<div class="container">
 
-        </div>
-        <div class="span12" style="width: 100%;">
+
+            <div id="searchDiv" class="accordion-group" >
+                <div class="accordion-heading">
+                    <a href="#collapseOne" class="accordion-toggle" data-toggle="collapse" >
+                        功能区
+                    </a>
+
+                </div>
+                <div id="collapseOne" class="accordion-body collapse in ">
+                    <div class="accordion-inner">
+                        <form class="form-inline">
+                            <label class="" for="inputName">姓名</label>
+                            <input type="text" id="inputName" placeholder="姓名">
+                            <label class="" for="inputSex">性别</label>
+                            <input type="text" id="inputSex" placeholder="性别">
+                            <button type="submit" class="btn btn-primary">查询</button>
+                            <button type="reset" class="btn btn-primary" >重置</button>
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </div>
+
             <table id="grid-table"></table>
             <div id="grid-pager"></div>
-        </div>
-    </div>
 
+</div>
 
 <script src="lib/jqGrid-4.4.3/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <!--<script src="lib/bootstrap/2.3.2/js/bootstrap.min.js"></script>-->
@@ -119,7 +140,7 @@
             },
 
             editurl: $path_base+"/dummy.html",//nothing is saved
-            caption: "jqGrid with inline editing",
+            caption: "jqGrid 表格数据",
 
 
             autowidth: true
