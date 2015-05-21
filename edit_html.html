@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>zTree</title>
+    <link rel="stylesheet" href="lib/jquery-ui-1.11.0.custom/jquery-ui.css"/>
+    <link rel="stylesheet" href="lib/bootstrap/2.3.2/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="lib/jquery/jquery-1.9.1.min.js"></script>
+    <script src="lib/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container container-fluid" contentEditable="true">
+
+
+    <div class="">
+        <h3>【正文】</h3>
+        <div id="content"> </div>
+    </div>
+</div>
+
+
+<script>
+
+    var content = "《口腔常见疾病彩色图谱》涉及口腔内科、"+
+    "口腔外科、"+
+    "口腔黏膜病、牙周病等诸多口腔专业领域，内容全面、系统，图文并茂。"+
+    "在内容结构方面遵循了符合临床思路的ADPIE形式，即治疗前评估、诊断、治疗设计、治疗实施和治疗后评价等五大方面，"+
+    "并引入了章节学习目标、病例分析、自测习题、附加网上资源等与读者的互动环节。本书的编排也较有特色，几乎每章都以学习目标开始，"+
+    "以病例分析结束；左页是文字描述，关键字加深；右页是正文中涉及的图片或图示，便于对照学习和查阅。特别值得一提的是，"+
+    "书中所配600余幅清晰珍贵的图片，典型而精美，与文字叙述相得益彰，除了常见病、多发病以外，还有很多十分罕见的病例，是作者多年临床经验的结晶。";
+
+    var contentDatas = [
+        {id:1,pid:0,type:"段落",text:content+11},
+        {id:2,pid:0,type:"段落",text:content+22},
+        {id:3,pid:0,type:"段落",text:content+33},
+        {id:4,pid:0,type:"段落",text:content+44},
+        {id:5,pid:0,type:"图片",img_path:"aaaa.png"},
+        {id:6,pid:0,type:"段落",text:content+55},
+        {id:7,pid:0,type:"段落",text:content+66},
+        {id:8,pid:0,type:"段落",text:content+77},
+        {id:9,pid:0,type:"段落",text:content+88}
+    ];
+
+
+
+    $(document).ready(function(){
+        $("#show_01").html(content);
+
+        var suf="</p>";
+        var data = "";
+        for(var i=0;i<contentDatas.length;i++){
+            if(contentDatas[i].type == "段落"){
+                data = "<p id='" +contentDatas[i].id+ "' >" + "&nbsp;&nbsp;&nbsp;&nbsp;"+contentDatas[i].text+ "</p>";
+                $("#content").append(data);
+            }else if(contentDatas[i].type == "图片"){
+                  data = "<img src='"+ contentDatas[i].img_path +"' alt=''/>";
+                $("#content").append(data);
+            }
+
+        }
+
+    });
+
+
+
+</script>
+</body>
+</html>
