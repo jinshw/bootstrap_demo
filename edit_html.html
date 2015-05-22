@@ -10,17 +10,17 @@
 
 </head>
 <body>
-<div class="container container-fluid" contentEditable="true">
+<div class="container container-fluid">
 
 
     <div class="">
         <h3>【正文】</h3>
-        <div id="content"> </div>
+        <div id="content" > </div>
     </div>
 </div>
 
 
-<script>
+<script type="text/javascript">
 
     var content = "《口腔常见疾病彩色图谱》涉及口腔内科、"+
     "口腔外科、"+
@@ -51,7 +51,7 @@
         var data = "";
         for(var i=0;i<contentDatas.length;i++){
             if(contentDatas[i].type == "段落"){
-                data = "<p id='" +contentDatas[i].id+ "' >" + "&nbsp;&nbsp;&nbsp;&nbsp;"+contentDatas[i].text+ "</p>";
+                data = "<p id='" +contentDatas[i].id+ "' contentEditable='true'' >" + "&nbsp;&nbsp;&nbsp;&nbsp;"+contentDatas[i].text+ "</p>";
                 $("#content").append(data);
             }else if(contentDatas[i].type == "图片"){
                   data = "<img src='"+ contentDatas[i].img_path +"' alt=''/>";
@@ -60,9 +60,28 @@
 
         }
 
+        $("#content").append("<p>" + "&nbsp;&nbsp;&nbsp;&nbsp;"+content+ "<img src='aaaa.png' alt='aaaa'/></p>");
+
+
+//        document.getElementById('content').onkeydown = function(e) {
+//            var ev = e || window.event;
+//            var key = ev.keyCode || ev.charCode;
+//            var sel, rang, br, fixbr, node, inner, tempRange, offset;
+//            if(key == 13) {
+//
+//                alert($(this).attr("id"));
+//            }
+//
+//        }
+
+        /*监听输入框的回车操作*/
+        $("p").bind('keypress',function(event){
+            if(event.keyCode == "13") {
+                alert($(this).attr("id"));
+            }
+        });
+
     });
-
-
 
 </script>
 </body>
