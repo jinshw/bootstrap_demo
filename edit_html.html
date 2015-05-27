@@ -62,8 +62,7 @@
             text: "段前添加文本",
             func: function() {
 //                $(this).css("padding", "10px");
-
-                var pid = parseInt( $(this).prev().attr('id'));
+                var pid = parseInt( $(this).attr('id'));
                 var oneId = pid + 0.1 ;
                 var phase = "<p id='"+ oneId +"' "+ "contentEditable='true'"  +"></p>";
 
@@ -78,7 +77,7 @@
             text: "断后添加文本",
             func: function() {
 //                $(this).css("padding", "10px");
-                var pid = parseInt( $(this).prev().attr('id'));
+                var pid = parseInt( $(this).attr('id'));
                 var oneId = pid + 0.1 ;
                 var phase = "<p id='"+ oneId +"' "+ "contentEditable='true'"  +"></p>";
 
