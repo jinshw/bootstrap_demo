@@ -11,30 +11,39 @@
 </head>
 <body>
 <div class="container container-fluid">
-
-    <div id="mydiv1" style="position:absolute;display:none;border:1px solid silver;background:silver;">
-
-        提示1效果
-
-    </div>
-
-    <div id="mydiv2" style="position:absolute;display:none;border:1px solid silver;background:silver;">
-
-        提示2效果
-
-    </div>
-
-
-    <a id="t1" onMouseOver="javascript:show(this,'mydiv1');" onMouseOut="hide(this,'mydiv1')">鼠标放上去1</a>
-
-    <br><br><br><br><br>
-
-    <a id="t2" onMouseOver="javascript:show(this,'mydiv2');" onMouseOut="hide(this,'mydiv2')">鼠标放上去2</a>
+    <button id="test" onclick="test();">测试</button>
 </div>
 
 
 <script type="text/javascript">
+    function fRandomBy(under, over){
+       /* switch(arguments.length){
+            case 1: return parseInt(Math.random()*under+1);
+            case 2: return parseInt(Math.random()*(over-under+1) + under);
+            default: return 0;
+        }*/
+       return parseInt(Math.random()*(over-0.1))+under;
+    }
+    function GetRandomNum(Min,Max){
 
+        var Range = Max - Min;
+
+        var Rand = Math.random();
+
+        return (Math.random() + Min).toFixed(Max);
+
+    }
+    function test() {
+//       alert(GetRandomNum(2,5)) ;
+//        alert(random(1,2));
+        var tt = "0.001"+"2";
+
+        alert(parseFloat(tt));
+    }
+
+    function random(min,max){
+        return Math.floor(min+Math.random()*(max-min));
+    }
     function show(obj,id) {
 
         var objDiv = $("#"+id+"");

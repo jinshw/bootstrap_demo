@@ -24,7 +24,7 @@
 
     <div class="">
 
-        <h3>【正文】</h3>
+        <h3 style="color: #0044cc;">【正文】</h3>
         <div id="content" > </div>
     </div>
 
@@ -74,22 +74,61 @@
                 });
             }
         }, {
-            text: "断后添加文本",
+            text: "段后添加文本",
             func: function() {
 //                $(this).css("padding", "10px");
-                var pid = parseInt( $(this).attr('id'));
-                var oneId = pid + 0.1 ;
-                var phase = "<p id='"+ oneId +"' "+ "contentEditable='true'"  +"></p>";
-
-                $(this).after(phase);
-                var nextId =  $(this).next("p").focus();
-
-                $("p").smartMenu(menuData, {
-                    name: "image"
-                });
+                addPre(this);
             }
         }]
     ];
+function addPre(obj){
+    var pid = parseFloat( $(obj).attr('id'));
+    var selectedId =  $(obj).attr('id');
+
+    var nextId = $(obj).next("p").attr('id');
+    alert("selectedId=="+selectedId);
+    alert("nextId=="+nextId);
+    var newId = getNewId(selectedId,nextId);
+    alert("newId==="+newId);
+    var oneId = pid + 0.1 ;
+
+    var phase = "<p id='"+ newId +"' "+ "contentEditable='true'"  +"></p>";
+
+    $(obj).after(phase);
+    var nextId =  $(obj).next("p").focus();
+
+    $("p").smartMenu(menuData, {
+        name: "image"
+    });
+}
+
+function getNewId(selectedId,nextId){
+//    var tempId =parseFloat(selectedId)  + 0.1;
+    var tempId ="";
+    var selectedIdFloat = parseFloat(selectedId);
+    var nextIdFloat = parseFloat(nextId);
+    var num="1";
+    while(tempId <= selectedIdFloat || tempId >= nextIdFloat){
+
+        if(selectedId.indexOf(".")==-1){//整数
+            alert("整数");
+            num = "0"+num;
+            tempId = selectedId +"."+num;
+            tempId = parseFloat(tempId);
+        }else{//小数
+            alert("小数");
+            num = "0"+num;
+            tempId = selectedId + num;
+            tempId = parseFloat(tempId);
+        }
+
+//        tempId = parseFloat(selectedId + 1) ;
+        alert(tempId);
+    }
+
+    return tempId;
+}
+
 
     $(document).ready(function(){
 
@@ -108,7 +147,7 @@
 
         }
 
-        $("#content").append("<p>" + "&nbsp;&nbsp;&nbsp;&nbsp;"+content+ "<img src='aaaa.png' alt='aaaa'/></p>");
+//        $("#content").append("<p>" + "&nbsp;&nbsp;&nbsp;&nbsp;"+content+ "<img src='aaaa.png' alt='aaaa'/></p>");
 
        /* $("button[name='addppp']").click(function(){
 //            alert($(this).attr("name"));
