@@ -14,213 +14,270 @@
 <body>
 <div class="container container-fluid">
 
-    <div id="showDiv" class="" style="position:absolute;display:none;border:1px solid silver;background:silver;">
-        <div class="btn-group">
-            <button class="btn" id="preBt">段前添加内容</button>
-            <button class="btn" id="afterBt">段后添加内容</button>
-        </div>
-    </div>
-
 
     <div class="">
-
         <h3 style="color: #0044cc;">【正文】</h3>
-        <div id="content" > </div>
+        <button class="btn btn-primary" onclick="saveText();">保存</button>
+        <div id="content"></div>
     </div>
-
 
 
 </div>
 
+<form action="" class="form-horizontal">
+    <div id="uploadImgModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="uploadImgModalML" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="uploadImgModalML">上传图片</h3>
+        </div>
+        <div class="modal-body">
+                <!--<label class="control-label" for="imgName">图片名称</label>-->
+                <!--<div class="controls">-->
+                    <!--<input id="imgName" type="text"/>-->
+                <!--</div>-->
+                <div class="input-append">
+                    <input type="text"/>
+                    <button class="btn">选择图片</button>
+                </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary">上传</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+        </div>
+
+    </div>
+</form>
+
 
 <script type="text/javascript">
 
-    var content = "《口腔常见疾病彩色图谱》涉及口腔内科、"+
-    "口腔外科、"+
-    "口腔黏膜病、牙周病等诸多口腔专业领域，内容全面、系统，图文并茂。"+
-    "在内容结构方面遵循了符合临床思路的ADPIE形式，即治疗前评估、诊断、治疗设计、治疗实施和治疗后评价等五大方面，"+
-    "并引入了章节学习目标、病例分析、自测习题、附加网上资源等与读者的互动环节。本书的编排也较有特色，几乎每章都以学习目标开始，"+
-    "以病例分析结束；左页是文字描述，关键字加深；右页是正文中涉及的图片或图示，便于对照学习和查阅。特别值得一提的是，"+
-    "书中所配600余幅清晰珍贵的图片，典型而精美，与文字叙述相得益彰，除了常见病、多发病以外，还有很多十分罕见的病例，是作者多年临床经验的结晶。";
+    //暂存段落内容
+    var contentTemp = "";
+    //删除段落的ID
+    var deleteIds = "";
+
+    var content = "《口腔常见疾病彩色图谱》涉及口腔内科、" +
+            "口腔外科、" +
+            "口腔黏膜病、牙周病等诸多口腔专业领域，内容全面、系统，图文并茂。" +
+            "在内容结构方面遵循了符合临床思路的ADPIE形式，即治疗前评估、诊断、治疗设计、治疗实施和治疗后评价等五大方面，" +
+            "并引入了章节学习目标、病例分析、自测习题、附加网上资源等与读者的互动环节。本书的编排也较有特色，几乎每章都以学习目标开始，" +
+            "以病例分析结束；左页是文字描述，关键字加深；右页是正文中涉及的图片或图示，便于对照学习和查阅。特别值得一提的是，" +
+            "书中所配600余幅清晰珍贵的图片，典型而精美，与文字叙述相得益彰，除了常见病、多发病以外，还有很多十分罕见的病例，是作者多年临床经验的结晶。";
 
     var contentDatas = [
-        {id:1,pid:0,type:"段落",text:content+11},
-        {id:2,pid:0,type:"段落",text:content+22},
-        {id:3,pid:0,type:"段落",text:content+33},
-        {id:4,pid:0,type:"段落",text:content+44},
-        {id:5,pid:0,type:"图片",img_path:"aaaa.png"},
-        {id:6,pid:0,type:"段落",text:content+55},
-        {id:7,pid:0,type:"段落",text:content+66},
-        {id:8,pid:0,type:"段落",text:content+77},
-        {id:9,pid:0,type:"段落",text:content+88}
+        {id: 1, pid: 0,orders:1, type: "段落", text: content + 11},
+        {id: 2, pid: 0,orders:2, type: "段落", text: content + 22},
+        {id: 3, pid: 0,orders:3,type: "段落", text: content + 33},
+        {id: 4, pid: 0,orders:4, type: "段落", text: content + 44},
+        {id: 5, pid: 0,orders:5, type: "图片", img_path: "aaaa.png"},
+        {id: 6, pid: 0,orders:6, type: "段落", text: content + 55},
+        {id: 7, pid: 0,orders:7, type: "段落", text: content + 66},
+        {id: 8, pid: 0,orders:8, type: "段落", text: content + 77},
+        {id: 9, pid: 0,orders:9, type: "段落", text: content + 88}
     ];
 
 
-//事例地址：http://www.zhangxinxu.com/study/201105/jquery-plugin-smart-menu-demo.html
+    //事例地址：http://www.zhangxinxu.com/study/201105/jquery-plugin-smart-menu-demo.html
     var menuData = [
-        [{
-            text: "段前添加文本",
-            func: function() {
-//                $(this).css("padding", "10px");
-                var pid = parseInt( $(this).attr('id'));
-                var oneId = pid + 0.1 ;
-                var phase = "<p id='"+ oneId +"' "+ "contentEditable='true'"  +"></p>";
-
-                $(this).before(phase);
-                var nextId =  $(this).prev("p").focus();
-
-                $("p").smartMenu(menuData, {
-                    name: "image"
-                });
+        [
+            {
+                text: "段前添加文本",
+                func: function () {
+                    addBefore(this,1);
+                }
+            },
+            {
+                text: "段后添加文本",
+                func: function () {
+                    addAfter(this,1);
+                }
+            },
+            {
+                text:"段前插图",
+                func:function(){
+                    addBefore(this,2);
+                }
+            },
+            {
+                text:"段后插图",
+                func:function(){
+                    addAfter(this,2);
+                }
+            },
+            {
+                text:"删除",
+                func: function () {
+                    deleteObj(this);
+                }
             }
-        }, {
-            text: "段后添加文本",
-            func: function() {
-//                $(this).css("padding", "10px");
-                addPre(this);
-            }
-        }]
+        ]
     ];
-function addPre(obj){
-    var pid = parseFloat( $(obj).attr('id'));
-    var selectedId =  $(obj).attr('id');
 
-    var nextId = $(obj).next("p").attr('id');
-    alert("selectedId=="+selectedId);
-    alert("nextId=="+nextId);
-    var newId = getNewId(selectedId,nextId);
-    alert("newId==="+newId);
-    var oneId = pid + 0.1 ;
+    //删除选中对象
+    function deleteObj(obj){
+        var ids = $("#isId_"+$(obj).attr('id')).val();
+        if(typeof (ids) == "undefined" || ids == ""){
 
-    var phase = "<p id='"+ newId +"' "+ "contentEditable='true'"  +"></p>";
-
-    $(obj).after(phase);
-    var nextId =  $(obj).next("p").focus();
-
-    $("p").smartMenu(menuData, {
-        name: "image"
-    });
-}
-
-function getNewId(selectedId,nextId){
-//    var tempId =parseFloat(selectedId)  + 0.1;
-    var tempId ="";
-    var selectedIdFloat = parseFloat(selectedId);
-    var nextIdFloat = parseFloat(nextId);
-    var num="1";
-    while(tempId <= selectedIdFloat || tempId >= nextIdFloat){
-
-        if(selectedId.indexOf(".")==-1){//整数
-            alert("整数");
-            num = "0"+num;
-            tempId = selectedId +"."+num;
-            tempId = parseFloat(tempId);
-        }else{//小数
-            alert("小数");
-            num = "0"+num;
-            tempId = selectedId + num;
-            tempId = parseFloat(tempId);
+        }else{
+            deleteIds = deleteIds+","+ids;
         }
-
-//        tempId = parseFloat(selectedId + 1) ;
-        alert(tempId);
+        alert("deleteIds==="+deleteIds);
+        $(obj).remove();
     }
 
-    return tempId;
-}
+    //段前添加文本，obj:右键选中对象，flag：1 文本，2 图片
+    function addBefore(obj,flag){
+        var pid = parseInt($(obj).attr('id'));
+        var selectedId = $(obj).attr('id');
+        var prevId = $(obj).prev("p").attr('id');
 
-
-    $(document).ready(function(){
-
-        $("#show_01").html(content);
-
-        var suf="</p>";
-        var data = "";
-        for(var i=0;i<contentDatas.length;i++){
-            if(contentDatas[i].type == "段落"){
-                data = "<p id='" +contentDatas[i].id+ "' contentEditable='true'>" + "&nbsp;&nbsp;&nbsp;&nbsp;"+contentDatas[i].text+ "</p>";
-                $("#content").append(data);
-            }else if(contentDatas[i].type == "图片"){
-                  data = "<img src='"+ contentDatas[i].img_path +"' alt=''/>";
-                $("#content").append(data);
-            }
-
+        alert("selectedId==" + selectedId);
+        alert("prevId==" + prevId);
+        if(typeof (prevId) == "undefined"){
+            prevId = "0";
+            alert("prevId 0========"+prevId);
+        }
+        var newId = getNextNewId(prevId, selectedId);
+        alert("newId===" + newId);
+        var phase ="";
+        var isChangeHTML = "<input type='hidden' value='2' id=isChange_"+newId+" />";//标志2：新增
+        var isIdHTML = "<input type='hidden' value='' id=isId_"+newId+" />";
+        var isTypeHTML = "";
+        if(flag == 1){//文本
+            isTypeHTML = "<input type='hidden' value='段落' id=isType_"+newId+" />";
+            phase = "<p id='" + newId + "' " + "contentEditable='true'" + ">"+ isChangeHTML+isIdHTML+isTypeHTML +"</p>";
+        }else if(flag == 2){//图片
+            isTypeHTML = "<input type='hidden' value='图片' id=isType_"+newId+" />";
+            $("#uploadImgModal").modal();//选择图片上传（调用上传组件）
+            //获取上传后返回的图片路径
+            var imgPath = "aaaa.png";//事例：换成上传图片后的路径
+            phase = "<p id='" + newId + "'>"+ isChangeHTML+isIdHTML+isTypeHTML +"<img src='" + imgPath + "' alt=''/></p>";
         }
 
-//        $("#content").append("<p>" + "&nbsp;&nbsp;&nbsp;&nbsp;"+content+ "<img src='aaaa.png' alt='aaaa'/></p>");
-
-       /* $("button[name='addppp']").click(function(){
-//            alert($(this).attr("name"));
-//            alert($(this).prev().attr('id'));
-            var pid = parseInt( $(this).prev().attr('id'));
-            var oneId = pid + 0.1 ;
-            var phase = "<p id='"+ oneId +"' "+ "contentEditable='true'"  +"></p>";
-
-            $(this).after(phase);
-           var nextId =  $(this).next("p").focus();
-
-        });*/
-//        document.getElementById('content').onkeydown = function(e) {
-//            var ev = e || window.event;
-//            var key = ev.keyCode || ev.charCode;
-//            var sel, rang, br, fixbr, node, inner, tempRange, offset;
-//            if(key == 13) {
-//
-//                alert($(this).attr("id"));
-//            }
-//
-//        }
-
-        /*监听输入框的回车操作*/
-      /*  $("p").bind('keypress',function(event){
-            if(event.keyCode == "13") {
-                alert($(this).attr("id"));
-            }
-        });*/
-
-        /*段落鼠标移动事件*/
-       /* $("p").mouseover(function(){
-//            $("p").css("background-color","yellow");
-            var objDiv = $("#showDiv");
-            objDiv.css("display","block");
-            objDiv.css("left", event.clientX);
-//            alert(event.clientX);
-            objDiv.css("top", event.clientY - 10);
-
-        });
-        $("p").mouseout(function(){
-//            $("p").css("background-color","#E9E9E4");
-            var objDiv = $("#showDiv");
-            objDiv.css("display","none");
-        });
-
-        $("#showDiv").mouseover(function(){
-            var objDiv = $("#showDiv");
-            objDiv.css("display","block");
-        });*/
-
-
-
-        $("#afterBt").click(function(){
-//            alert($(this).attr("name"));
-//            alert($(this).prev().attr('id'));
-            alert($(this).attr('id'));
-            var pid = parseInt( $(this).prev().attr('id'));
-            var oneId = pid + 0.1 ;
-            var phase = "<p id='"+ oneId +"' "+ "contentEditable='true'"  +"></p>";
-
-            $(this).after(phase);
-            var nextId =  $(this).next("p").focus();
-
-        });
-
-
+        $(obj).before(phase);
+        var nextId = $(obj).prev("p").focus();
 
         $("p").smartMenu(menuData, {
             name: "image"
         });
+    }
+
+
+
+    //段后添加文本 obj:右键选中对象，flag：1 文本，2 图片
+    function addAfter(obj,flag) {
+        var pid = parseFloat($(obj).attr('id'));
+        var selectedId = $(obj).attr('id');
+
+        var nextId = $(obj).next("p").attr('id');
+        alert("selectedId==" + selectedId);
+        alert("nextId==" + nextId);
+        var newId = getNextNewId(selectedId, nextId);
+        alert("newId===" + newId);
+
+        var phase;
+        var isChangeHTML = "<input type='hidden' value='2' id=isChange_"+newId+" />";//标志2：新增
+        var isIdHTML = "<input type='hidden' value='' id=isId_"+newId+" />";
+
+        if(flag == 1){//文本
+            phase = "<p id='" + newId + "' " + "contentEditable='true'" + ">"+isChangeHTML+isIdHTML+"</p>";
+        }else if(flag == 2){//图片
+            $("#uploadImgModal").modal();//选择图片上传（调用上传组件）
+            //获取上传后返回的图片路径
+            var imgPath = "aaaa.png";//事例：换成上传图片后的路径
+            phase = "<p id='" + newId + "'>"+ isChangeHTML+isIdHTML +"<img src='" + imgPath + "' alt=''/></p>";
+        }
+        $(obj).after(phase);
+        var nextId = $(obj).next("p").focus();
+
+        $("p").smartMenu(menuData, {
+            name: "image"
+        });
+    }
+
+    //获取新ID（段后添加文本）
+    function getNextNewId(oneId, twoId) {
+//        if(oneId == null){//
+//            alert("oneId == 空");
+//        }
+        var tempId = "";
+        var selectedIdFloat = parseFloat(oneId);
+        var nextIdFloat = parseFloat(twoId);
+        var num = "1";
+        while (tempId <= selectedIdFloat || tempId >= nextIdFloat) {
+
+            if (oneId.indexOf(".") == -1) {//整数
+                alert("整数");
+                num = "0" + num;
+                tempId = oneId + "." + num;
+                tempId = parseFloat(tempId);
+            } else {//小数
+                alert("小数");
+                num = "0" + num;
+                tempId = oneId + num;
+                tempId = parseFloat(tempId);
+            }
+
+//        tempId = parseFloat(selectedId + 1) ;
+            alert(tempId);
+        }
+
+        return tempId;
+    }
+
+    $(document).ready(function () {
+        var suf = "</p>";
+        var data = "";
+        var isChangeHTML = "";//标志：0 未变、1 已修改、2 新增
+        var isIdHTML = "";
+        var isTypeHTML = "";
+        //初始化页面内容
+        for (var i = 0; i < contentDatas.length; i++) {
+            isChangeHTML = "<input type='hidden' value='0' id=isChange_"+contentDatas[i].orders+" />";
+            isIdHTML = "<input type='hidden' value='"+contentDatas[i].id+"' id=isId_"+contentDatas[i].orders+" />";
+            isTypeHTML = "<input type='hidden' value='"+contentDatas[i].type+"' id=isType_"+contentDatas[i].orders+" />";
+
+            if (contentDatas[i].type == "段落") {
+                data = "<p id='" + contentDatas[i].orders + "' contentEditable='true'>"+isChangeHTML+isIdHTML+isTypeHTML + "&nbsp;&nbsp;&nbsp;&nbsp;" + contentDatas[i].text + "</p>";
+                $("#content").append(data);
+            } else if (contentDatas[i].type == "图片") {
+                data = "<p id='" + contentDatas[i].orders + "'>"+isChangeHTML+isIdHTML+isTypeHTML+"<img src='" + contentDatas[i].img_path + "' alt='图'/></p>";
+                $("#content").append(data);
+            }
+
+        }
+        //初始化右键
+        $("p").smartMenu(menuData, {
+            name: "image"
+        });
+
+        //段落获取焦点
+        $("p").focus(function(){
+            contentTemp = $(this).text();
+        });
+
+        //段落失去焦点
+        $("p").blur(function(){
+            var changeText = $(this).text();
+            if(contentTemp.trim() == changeText.trim()){
+//                alert("Text 内容未改变！");
+            }else{
+                alert("改变了！");
+                alert($(this).attr("id"));
+                var isChangeId = "isChange_"+$(this).attr("id");
+                $("#"+isChangeId).val("1");//设置为1：已修改
+            }
+        });
     });
 
+    //保存
+    function saveText(){
+        //获取删除段落ID
+        alert("deleteIds=="+deleteIds);
+        //获取新增段落（图片和文本）
+        var pList = $("#content p");
+        alert(pList.length);
+    }
 
 </script>
 </body>
