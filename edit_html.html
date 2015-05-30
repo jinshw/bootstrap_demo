@@ -65,15 +65,15 @@
             "书中所配600余幅清晰珍贵的图片，典型而精美，与文字叙述相得益彰，除了常见病、多发病以外，还有很多十分罕见的病例，是作者多年临床经验的结晶。";
 
     var contentDatas = [
-        {id: 1, pid: 0,orders:1, type: "段落", text: content + 11},
-        {id: 2, pid: 0,orders:2, type: "段落", text: content + 22},
-        {id: 3, pid: 0,orders:3,type: "段落", text: content + 33},
-        {id: 4, pid: 0,orders:4, type: "段落", text: content + 44},
-        {id: 5, pid: 0,orders:5, type: "图片", img_path: "aaaa.png"},
-        {id: 6, pid: 0,orders:6, type: "段落", text: content + 55},
-        {id: 7, pid: 0,orders:7, type: "段落", text: content + 66},
-        {id: 8, pid: 0,orders:8, type: "段落", text: content + 77},
-        {id: 9, pid: 0,orders:9, type: "段落", text: content + 88}
+        {id: 11, pid: 0,orders:1, type: "段落", text: content + 11},
+        {id: 22, pid: 0,orders:2, type: "段落", text: content + 22},
+        {id: 33, pid: 0,orders:3,type: "段落", text: content + 33},
+        {id: 44, pid: 0,orders:4, type: "段落", text: content + 44},
+        {id: 55, pid: 0,orders:5, type: "图片", img_path: "aaaa.png"},
+        {id: 66, pid: 0,orders:6, type: "段落", text: content + 55},
+        {id: 77, pid: 0,orders:7, type: "段落", text: content + 66},
+        {id: 88, pid: 0,orders:8, type: "段落", text: content + 77},
+        {id: 99, pid: 0,orders:9, type: "段落", text: content + 88}
     ];
 
 
@@ -121,7 +121,6 @@
         }else{
             deleteIds = deleteIds+","+ids;
         }
-        alert("deleteIds==="+deleteIds);
         $(obj).remove();
     }
 
@@ -131,27 +130,25 @@
         var selectedId = $(obj).attr('id');
         var prevId = $(obj).prev("p").attr('id');
 
-        alert("selectedId==" + selectedId);
-        alert("prevId==" + prevId);
         if(typeof (prevId) == "undefined"){
             prevId = "0";
-            alert("prevId 0========"+prevId);
         }
         var newId = getNextNewId(prevId, selectedId);
-        alert("newId===" + newId);
         var phase ="";
         var isChangeHTML = "<input type='hidden' value='2' id=isChange_"+newId+" />";//标志2：新增
         var isIdHTML = "<input type='hidden' value='' id=isId_"+newId+" />";
         var isTypeHTML = "";
+        var imgHTML = "";
         if(flag == 1){//文本
             isTypeHTML = "<input type='hidden' value='段落' id=isType_"+newId+" />";
-            phase = "<p id='" + newId + "' " + "contentEditable='true'" + ">"+ isChangeHTML+isIdHTML+isTypeHTML +"</p>";
+            phase = "<p id='" + newId + "' " + "contentEditable='true'" + "></p>"+ isChangeHTML+isIdHTML+isTypeHTML;
         }else if(flag == 2){//图片
             isTypeHTML = "<input type='hidden' value='图片' id=isType_"+newId+" />";
             $("#uploadImgModal").modal();//选择图片上传（调用上传组件）
             //获取上传后返回的图片路径
             var imgPath = "aaaa.png";//事例：换成上传图片后的路径
-            phase = "<p id='" + newId + "'>"+ isChangeHTML+isIdHTML+isTypeHTML +"<img src='" + imgPath + "' alt=''/></p>";
+            imgHTML = "<img id= img_"+newId +" src='" + imgPath + "' alt=''/>";
+            phase = "<p id='" + newId + "'>"+imgHTML +"</p>"+ isChangeHTML+isIdHTML+isTypeHTML;
         }
 
         $(obj).before(phase);
@@ -170,22 +167,22 @@
         var selectedId = $(obj).attr('id');
 
         var nextId = $(obj).next("p").attr('id');
-        alert("selectedId==" + selectedId);
-        alert("nextId==" + nextId);
         var newId = getNextNewId(selectedId, nextId);
-        alert("newId===" + newId);
-
         var phase;
         var isChangeHTML = "<input type='hidden' value='2' id=isChange_"+newId+" />";//标志2：新增
         var isIdHTML = "<input type='hidden' value='' id=isId_"+newId+" />";
-
+        var isTypeHTML = "";
+        var imgHTML = "";
         if(flag == 1){//文本
-            phase = "<p id='" + newId + "' " + "contentEditable='true'" + ">"+isChangeHTML+isIdHTML+"</p>";
+            isTypeHTML = "<input type='hidden' value='段落' id=isType_"+newId+" />";
+            phase = "<p id='" + newId + "' " + "contentEditable='true'" + "></p>"+isChangeHTML+isIdHTML+isTypeHTML;
         }else if(flag == 2){//图片
+            isTypeHTML = "<input type='hidden' value='图片' id=isType_"+newId+" />";
             $("#uploadImgModal").modal();//选择图片上传（调用上传组件）
             //获取上传后返回的图片路径
             var imgPath = "aaaa.png";//事例：换成上传图片后的路径
-            phase = "<p id='" + newId + "'>"+ isChangeHTML+isIdHTML +"<img src='" + imgPath + "' alt=''/></p>";
+            imgHTML = "<img id= img_"+newId +" src='" + imgPath + "' alt=''/>";
+            phase = "<p id='" + newId + "'>"+imgHTML +"</p>"+ isChangeHTML+isIdHTML+isTypeHTML;
         }
         $(obj).after(phase);
         var nextId = $(obj).next("p").focus();
@@ -207,21 +204,15 @@
         while (tempId <= selectedIdFloat || tempId >= nextIdFloat) {
 
             if (oneId.indexOf(".") == -1) {//整数
-                alert("整数");
                 num = "0" + num;
                 tempId = oneId + "." + num;
                 tempId = parseFloat(tempId);
             } else {//小数
-                alert("小数");
                 num = "0" + num;
                 tempId = oneId + num;
                 tempId = parseFloat(tempId);
             }
-
-//        tempId = parseFloat(selectedId + 1) ;
-            alert(tempId);
         }
-
         return tempId;
     }
 
@@ -231,17 +222,18 @@
         var isChangeHTML = "";//标志：0 未变、1 已修改、2 新增
         var isIdHTML = "";
         var isTypeHTML = "";
+        var imgHTML = "";
         //初始化页面内容
         for (var i = 0; i < contentDatas.length; i++) {
             isChangeHTML = "<input type='hidden' value='0' id=isChange_"+contentDatas[i].orders+" />";
             isIdHTML = "<input type='hidden' value='"+contentDatas[i].id+"' id=isId_"+contentDatas[i].orders+" />";
             isTypeHTML = "<input type='hidden' value='"+contentDatas[i].type+"' id=isType_"+contentDatas[i].orders+" />";
-
             if (contentDatas[i].type == "段落") {
-                data = "<p id='" + contentDatas[i].orders + "' contentEditable='true'>"+isChangeHTML+isIdHTML+isTypeHTML + "&nbsp;&nbsp;&nbsp;&nbsp;" + contentDatas[i].text + "</p>";
+                data = "<p id='" + contentDatas[i].orders + "' contentEditable='true'>" + "&nbsp;&nbsp;&nbsp;&nbsp;" + contentDatas[i].text + "</p>"+isChangeHTML+isIdHTML+isTypeHTML;
                 $("#content").append(data);
             } else if (contentDatas[i].type == "图片") {
-                data = "<p id='" + contentDatas[i].orders + "'>"+isChangeHTML+isIdHTML+isTypeHTML+"<img src='" + contentDatas[i].img_path + "' alt='图'/></p>";
+                imgHTML = "<img id= img_"+ contentDatas[i].orders +" src='" + contentDatas[i].img_path + "' alt='图'/>";
+                data = "<p id='" + contentDatas[i].orders + "'>"+imgHTML+"</p>"+isChangeHTML+isIdHTML+isTypeHTML;
                 $("#content").append(data);
             }
 
@@ -259,11 +251,8 @@
         //段落失去焦点
         $("p").blur(function(){
             var changeText = $(this).text();
-            if(contentTemp.trim() == changeText.trim()){
-//                alert("Text 内容未改变！");
-            }else{
-                alert("改变了！");
-                alert($(this).attr("id"));
+            if(contentTemp.trim() == changeText.trim()){//内容未变
+            }else{//内容改变
                 var isChangeId = "isChange_"+$(this).attr("id");
                 $("#"+isChangeId).val("1");//设置为1：已修改
             }
@@ -276,7 +265,39 @@
         alert("deleteIds=="+deleteIds);
         //获取新增段落（图片和文本）
         var pList = $("#content p");
-        alert(pList.length);
+        var jsonArr = [];
+        var isChange = "";
+        var orders = "";
+        var id  = "";
+        var type = "";
+        var content = "";
+        pList.each(function(){
+            isChange = "";
+            orders = "";
+            id  = "";
+            type = "";
+            content = "";
+
+            orders = $(this).attr("id").replace(".","\\.");//转译id中的小数点
+            id = $("#isId_"+orders).val();
+            type = $("#isType_"+orders).val();
+            isChange = $("#isChange_"+orders).val();
+
+
+
+            if(isChange == "1" || isChange == "2"){//isChange:标志：0 未变、1 已修改、2 新增
+                if(type == "图片"){
+                    content=$("#img_"+orders).attr("src");
+                }else if(type=="段落"){
+                    content = $("#"+orders).text().trim();
+                }
+                orders=orders.replace("\\.",".");//
+                jsonArr.push({id:id,orders:orders,type:type,isChange:isChange,content:content});
+            }
+//            alert("orders=="+orders+"   id="+id+"   type=="+type+"  isChange=="+isChange);
+        });
+
+        alert("jsonArr=="+JSON.stringify(jsonArr));
     }
 
 </script>
