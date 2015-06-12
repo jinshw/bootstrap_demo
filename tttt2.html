@@ -25,6 +25,17 @@
     <button>提示2效果</button>
 </div>
 
+
+<div style="position: relative; width: 600px;height: auto;margin: 0 auto;">
+    <p align="center" style="position: relative;">
+        <img src="aaaa.png" width="600" height="600"  align="center" alt="图片一："/>
+        <!--<button class="btn btn-primary" style="bottom: 1px;position: absolute;right: 0;">替换</button>-->
+        <i onclick="upLoadImg();"  class="icon-edit" title="替换图片"   style="bottom: 1px;position: absolute;right: 0;"></i>
+    </p>
+    <p align="center">图片一：KKKKKKKKK</p>
+
+</div>
+
 <a id="t1" onMouseOver="javascript:show(this,'mydiv1');" onMouseOut="hide(this,'mydiv1')">鼠标放上去1</a>
 <br><br><br><br><br>
 <a id="t2" onMouseOver="javascript:show(this,'mydiv2');" onMouseOut="hide(this,'mydiv2')">鼠标放上去2</a>
@@ -44,7 +55,9 @@
         $(objDiv).css("display", "none");
     }
 
-
+    function upLoadImg(obj){
+        alert("更新图片");
+    }
 </script>
 </body>
 </html>
