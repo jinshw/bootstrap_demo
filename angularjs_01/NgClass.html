@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="MyCssModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <style type="text/css">
+        .base-class {
+            -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+            transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+        }
+
+        .base-class.my-class {
+            color: red;
+            font-size:3em;
+        }
+    </style>
+    <title></title>
+    <link rel="stylesheet" href="../lib/bootstrap/3.3.4/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/ngclass.css"/>
+    <script type="text/javascript" src="../lib/angular-1.2.20/angular.js"></script>
+</head>
+<body>
+    <div class="container" ng-controller="MyCssCtrl">
+        <div ng-class="{error:isError,warning:isWarning}">{{messageText}}</div>
+        <div>
+            <button class="btn btn-primary" ng-click="showError()">Simulate Error</button>
+            <button class="btn btn-primary" ng-click="showWarning()">Simulate Warning</button>
+        </div>
+
+
+        <div>
+            <input id="setbtn" class="btn btn-primary" type="button" value="set" ng-click="myVar='my-class'">
+            <input id="clearbtn" class="btn btn-primary"  type="button" value="clear" ng-click="myVar=''">
+            <br>
+            <span class="base-class" ng-class="myVar">Sample Text</span>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script src="js/ngclass.js"></script>
+</body>
+</html>

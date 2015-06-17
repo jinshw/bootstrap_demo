@@ -159,6 +159,45 @@ h4{
     transition:all 0.2s ease 0s;
 }
 
+.widget .tag-cloud a:hover{
+    background: #e67e22 none repeat scroll 0 0;
+    border: 1px solid #e67e22;
+    color: #ffffff;
+    text-decoration: none;
+}
 
+.main-footer{
+    background: #202020 none repeat scroll 0 0;
+    color: #959595;
+    padding: 35px 0 0 ;
+}
 
+.main-footer .widget .title{
+    border-bottom: 1px solid #303030;
+    color: #ffffff;
+}
 
+.main-footer .widget .recent-post .recent-single-post{
+    border-bottom: 1px dashed #303030;
+}
+
+.widget .recent-post .recent-single-post{
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+}
+
+.main-footer .widget .recent-post .recent-single-post .post-title{
+    color: #959595;
+}
+
+.main-footer .widget .recent-post .recent-single-post .post-title:hover{
+    color: #e67e22;
+    text-decoration: none;
+}
+
+.main-footer .widget .tag-cloud a{
+    border: 1px solid #303030;
+}
+.main-footer .widget .friend-links a{
+    border:medium none;
+}
