@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../lib/bootstrap/3.3.4/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../lib/font-awesome/font-awesome-4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../lib/css/ghost.css"/>
+    <script src="../lib/angular-1.2.20/angular.js" type="application/javascript"></script>
+    <script src="../lib/angular-1.2.20/angular-ui-router.js" type="application/javascript"></script>
+    <script src="js/index.js"></script>
+</head>
+<body ng-app="myApp" class="home-template">
+    <!-- start header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="#">
+                        <img src="http://static.ghostchina.com/image/b/46/4f5566c1f7bc28b3f7ac1fada8abe.png" alt="Ghost 教程"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+
+    <div ui-view=""></div>
+</body>
+</html>
