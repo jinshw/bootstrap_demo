@@ -15,9 +15,26 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     {
         url: "/Page2",
         templateUrl: "Page2.html"
-    }).state("tab.Page3",
+    }).state("tab.angular_example",
     {
-        url: "/Page3",
-        templateUrl: "Page3.html"
+        url: "/angular_example",
+        templateUrl: "angular_example.html"
+    }).state("tab.angular_example.simple",
+    {
+        url: "/simple",
+        templateUrl: "simple.html"
+    }).state("tab.angular_example.angular_directive",
+    {
+        url: "/angular_directive",
+        templateUrl: "angular_directive.html"
     });
+});
+
+
+myApp.directive("myDirective",function(){
+    return {
+        restrict:"EACM",
+        template:"<div>Click me to go to Baidu</div>",
+        replace: true
+    };
 });

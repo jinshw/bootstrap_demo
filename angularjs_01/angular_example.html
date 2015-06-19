@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../lib/bootstrap/3.3.4/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../lib/font-awesome/font-awesome-4.3.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../lib/css/ghost.css"/>
+
 </head>
 <body>
     <!--angularjs 事例 start-->
@@ -14,7 +15,7 @@
             <div class="col-md-3">
                     <ul class="nav lefttree">
                         <li>
-                            <a href="" class="btn btn-primary">
+                            <a  ui-sref=".simple" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
                                 入门事例
                             </a>
@@ -25,11 +26,18 @@
                                 双向数据绑定
                             </a>
                         </li>
+                        <li>
+                            <a ui-sref=".angular_directive" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                                指令
+                            </a>
+                        </li>
                     </ul>
             </div>
+            <div class="col-md-9" ui-view=""></div>
         </div>
     </div>
     <!--angularjs 事例 end-->
-    <div ng-view=""></div>
+
 </body>
 </html>

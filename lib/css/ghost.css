@@ -201,3 +201,8 @@ h4{
 .main-footer .widget .friend-links a{
     border:medium none;
 }
+
+.lefttree .glyphicon-menu-right{
+    float: right;
+}
+
