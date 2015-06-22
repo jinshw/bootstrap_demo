@@ -2,7 +2,7 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="panel-title">
-            <h2>AngularJS Directive指令</h2>
+            <h4>AngularJS Directive指令(1)</h4>
         </div>
     </div>
     <div class="panel-body">
@@ -12,6 +12,22 @@
                 <div my-directive=""></div>
                 <div class="my-directive"></div>
                 <!-- directive:my-directive -->
+
+                <hr>
+
+                <div ng-controller="MyCtrl">
+                    <loader howToLoad="loadData()">滑动加载数据1</loader>
+                </div>
+                <div ng-controller="MyCtrl2">
+                    <loader howToLoad="loadData2()">滑动加载数据22</loader>
+                </div>
+                <hr/>
+
+                <div>
+                    <superman strength>动感超人----力量</superman>
+                    <superman strength speed>动感超人----力量+敏捷</superman>
+                    <superman strength speed light>动感超人----力量+敏捷+发光</superman>
+                </div>
             </div>
         </div>
     </div>
@@ -20,16 +36,39 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="panel-title">
-            <h2>AngularJS Directive指令</h2>
+            <h4>AngularJS Directive指令(2)---独立scope、scope绑定策略</h4>
         </div>
     </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <my-directive></my-directive>
-                <div my-directive=""></div>
-                <div class="my-directive"></div>
-                <!-- directive:my-directive -->
+                <hello></hello>
+                <hello></hello>
+                <hello></hello>
+                <hello></hello>
+                <hr/>
+
+                <b>scope 绑定方式：@(绑定字符串):</b>
+                <div ng-controller="MyCtrlScope1">
+                    <drink flavor="{{contrlFlavor}}"></drink>
+                </div>
+                <br/>
+                <b>scope 绑定方式：=（与父scope属性双向数据绑定）:</b>
+                <div ng-controller="MyCtrlScope2">
+                    <b>contrl:</b>
+                    <input type="text" ng-model="contrlFlavor"/>
+                    <b>directive scope:</b>
+                    <drink2 flavor="contrlFlavor"></drink2>
+                </div>
+                <br/>
+                <b>scope 绑定方式：&（传递一个父的scope函数，进行稍后调用）:</b>
+                <div ng-controller="MyCtrlScope3">
+                    <greeting greet="sayHello(name)"></greeting>
+                    <greeting greet="sayHello(name)"></greeting>
+                    <greeting greet="sayHello(name)"></greeting>
+                </div>
+
+
             </div>
         </div>
     </div>
