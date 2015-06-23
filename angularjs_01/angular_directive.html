@@ -73,3 +73,44 @@
         </div>
     </div>
 </div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h4>AngularJS Directive指令(3)---内部指令</h4>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form name="myForm" ng-submit="save()" ng-controller="TestFormModule">
+                    <input class="form-control" type="text" name="userName" ng-model="user.userName" required/>
+                    <input class="form-control" type="password" name="password" ng-model="user.password" required/>
+                    <input type="submit" ng-disabled="myForm.$invalid"/>
+                    <button class="btn-default" type="submit"  ng-disabled="myForm.$invalid">保存</button>
+                </form>
+                <hr/>
+
+                <form name="myForm" ng-submit="save()" ng-controller="TestFormModule" novalidate>
+                    <p>
+                        <input class="form-control" type="email" name="email" ng-model="user.userName" required/>
+                            <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                            <span ng-show="myForm.email.$error.required">邮箱不能为空！</span>
+                            <span ng-show="myForm.email.$error.email">请检查邮箱地址！</span>
+                            </span>
+                    </p>
+                    <p>
+                        <input class="form-control" type="password" name="password" ng-model="user.password" required/>
+                    </p>
+                    <p>
+                        <input type="submit" ng-disabled="myForm.$invalid"/>
+                    </p>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

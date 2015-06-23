@@ -180,3 +180,16 @@ myApp.directive("greeting", function () {
            "<button class='btn btn-primary' ng-click='greet({name:userName})' >Greeting</button></div>"
    }
 });
+
+myApp.controller("TestFormModule", ["$scope",function ($scope) {
+    $scope.user = {
+        userName:"jinshw",
+        password:""
+    };
+    $scope.save = function () {
+        alert("保存数据");
+    }
+}]);
+
+
+

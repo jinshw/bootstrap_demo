@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="TestFormModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../lib/bootstrap/3.3.4/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../lib/font-awesome/font-awesome-4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../lib/css/ghost.css"/>
+    <link rel="stylesheet" href="css/ngclass.css"/>
+    <script type="text/javascript" src="../lib/angular-1.2.20/angular.js"></script>
+    <script src="js/submit_req.js"></script>
+</head>
+<body>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h4>AngularJS Directive指令(3)---内部指令</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form  name="myForm" ng-submit="save()" ng-controller="TestFormModule">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" name="email" ng-model="user.userName" required class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" ng-model="user.password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <input type="file" id="exampleInputFile">
+                            <p class="help-block">Example block-level help text here.</p>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Check me out
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-disabled="myForm.$invalid">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form name="myForm" ng-submit="save()" ng-controller="TestFormModule" novalidate>
+    <p>
+        <input type="email" name="email" ng-model="user.userName" required/>
+        <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+        <span ng-show="myForm.email.$error.required">Email is required.</span>
+        <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+        </span>
+    </p>
+    <input type="password" name="password" ng-model="user.password" required/>
+    <input type="submit" ng-disabled="myForm.$invalid"/>
+</form>
+
+<hr/>
+
+</body>
+</html>
