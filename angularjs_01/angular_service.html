@@ -1,0 +1,32 @@
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h4>(1)服务：$http</h4>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-controller="LoadDataCtrl">
+                    <ul>
+                        <li ng-repeat="user in users">
+                            {{user.name}}
+                        </li>
+                    </ul>
+                </div>
+
+                <hr/>
+
+                <div ng-controller="ServiceController">
+                    <label>用户名称：</label>
+                    <input type="text" ng-model="username" placeholder="请输入用户名称" />
+                    <pre ng-show="username">{{users}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
