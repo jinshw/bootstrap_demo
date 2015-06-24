@@ -31,6 +31,10 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     {
         url:"/angular_service",
         templateUrl:"angular_service.html"
+    }).state("tab.angular_example.angular_filter",
+    {
+        url:"/angular_filter",
+        templateUrl:"angular_filter.html"
     });
 });
 
@@ -261,8 +265,15 @@ myApp.controller("ServiceController",["$scope","$timeout","userListService",
         })
     }]);
 
-
 /******************Service End*********************/
+/******************Filter Start*********************/
+function Ctrl($scope){
+    $scope.amount = 1234.56;
+    $scope.newDate =  new Date();
+
+}
+
+/******************Filter End*********************/
 
 
 
