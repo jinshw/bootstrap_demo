@@ -1,0 +1,31 @@
+/**
+ * Created by JINSHW on 2015-07-11.
+ * main
+ */
+
+body{
+    background-color: #efefef;
+}
+
+.p-screen{
+    background: red;
+    width: 320px;
+    height: 568px;
+    margin: 20px;
+    position: relative;
+}
+
+.p-qr-code{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    position: relative;
+}
+
+
+
+
+
+
+
+

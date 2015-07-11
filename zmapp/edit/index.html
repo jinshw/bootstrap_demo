@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css"/>
+    <script src="../lib/jquery-1.11.3.min.js"></script>
+    <script type="application/javascript" src="../lib/qrcode.js" ></script>
+    <script type="application/javascript" src="../lib/jquery.qrcode.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $("#p-qr-code").qrcode(window.location.href);
+        });
+
+    </script>
+</head>
+<body>
+<div class="p-screen">
+
+</div>
+
+<div class="p-qr-code" id="p-qr-code">
+
+</div>
+</body>
+</html>
