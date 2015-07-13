@@ -19,11 +19,37 @@ body{
     width: 100px;
     height: 100px;
     margin: 10px;
-    position: relative;
+    position: absolute;
+    left: 50%;
 }
 
+.phone{
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    height: 568px;
+    width: 320px;
+    padding: 30px 22px 81px;
+    top: 0;
+    position: absolute;
+    left: 20%;
+}
 
+#container{
+}
 
+#loading{
+    background: red;
+}
+
+.page1 .page_container{
+    background: rgba(0,0,0,0) url("1.jpg");
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
 
 
 
