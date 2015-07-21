@@ -70,7 +70,6 @@
 </article>
 
 
-<button id="addMove" onclick="addMove();">add mousemove</button>
 <input type="button" id="addMove2" onclick="addMove();" value="add2" />
 
 <script type="text/javascript">
@@ -102,30 +101,29 @@
         el.style.width  = document.documentElement.clientWidth  +'px';
         el.style.height = document.documentElement.clientHeight + 'px';
     }
+    var instace = {} ;
+    function myFuc(){
+            var e = e || window.event;
+            dialogInstace = instace;
+            instace.mouseOffsetLeft = e.pageX - instace.moveElement.offsetLeft ;
+            instace.mouseOffsetTop  = e.pageY - instace.moveElement.offsetTop ;
 
+//        Dialog('dialogDrag2','dialogMove');
+
+
+    }
     //	Dialog实例化的方法
     function Dialog( dragId , moveId ){
 
-        var instace = {} ;
 
+        instace = {} ;
         instace.dragElement  = g(dragId);	//	允许执行 拖拽操作 的元素
         instace.moveElement  = g(moveId);	//	拖拽操作时，移动的元素
 
         instace.mouseOffsetLeft = 0;			//	拖拽操作时，移动元素的起始 X 点
         instace.mouseOffsetTop = 0;			//	拖拽操作时，移动元素的起始 Y 点
 
-        instace.dragElement.addEventListener('mousedown',function(e){
-
-            var e = e || window.event;
-
-            dialogInstace = instace;
-            instace.mouseOffsetLeft = e.pageX - instace.moveElement.offsetLeft ;
-            instace.mouseOffsetTop  = e.pageY - instace.moveElement.offsetTop ;
-
-//            onMoveStartId = setInterval(onMoveStart,10);
-            return false;
-            // instace.moveElement.style.zIndex = zIndex ++;
-        });
+        instace.dragElement.addEventListener('mousedown',myFuc);
 
 
         oBody.on("mousemove",function( e ){
@@ -152,8 +150,6 @@
                 var maxX = dragArea.clientWidth -  instace.moveElement.offsetWidth;
                 var maxY = dragArea.clientHeight - instace.moveElement.offsetHeight ;
 
-                console.log("maxX======"+maxX);
-                console.log("maxY======"+maxY);
                 instace.moveElement.style.left = Math.min( Math.max( ( mousePos.x - instace.mouseOffsetLeft) , 0 ) , maxX) + "px";
                 instace.moveElement.style.top  = Math.min( Math.max( ( mousePos.y - instace.mouseOffsetTop ) , 0 ) , maxY) + "px";
             }
@@ -161,8 +157,8 @@
 //        fnMove(e);
         }).on("mouseup",function(){
             dialogInstace = false;
-            oBody.off("mousemove mouseup");
-            instace.dragElement.removeEventListener("mousedown");
+//            oBody.off("mousemove mouseup");
+//            instace.dragElement.removeEventListener("mousedown",myFuc);
         });
 
         return instace;
@@ -238,8 +234,6 @@
             var maxX = dragArea.clientWidth -  instace.moveElement.offsetWidth;
             var maxY = dragArea.clientHeight - instace.moveElement.offsetHeight ;
 
-            console.log("maxX======"+maxX);
-            console.log("maxY======"+maxY);
             instace.moveElement.style.left = Math.min( Math.max( ( mousePos.x - instace.mouseOffsetLeft) , 0 ) , maxX) + "px";
             instace.moveElement.style.top  = Math.min( Math.max( ( mousePos.y - instace.mouseOffsetTop ) , 0 ) , maxY) + "px";
         }
@@ -256,21 +250,5 @@
         Dialog('dialogDrag2','dialogMove');
     }
 </script>
-<script type="application/javascript" src="main.js"></script>
-<!--<button id="clear" onclick="clearMouse()">clear</button>
-
-<script type="application/javascript" src="mylib.js"></script>
-<script type="text/javascript">
-    window.onload = function() {
-        var obj1 = createDraggableObject();
-        var obj2 = createDraggableObject();
-        obj1.init($('dialogMove'));
-        obj2.init($('left-line-v'));
-    };
-
-    function clearMouse(obj){
-
-    }
-</script>-->
 </body>
 </html>

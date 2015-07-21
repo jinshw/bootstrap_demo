@@ -23,35 +23,287 @@ body{
     left: 50%;
 }
 
-.phone{
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    height: 568px;
+.operator {
+    display: none;
+}
+
+
+.show_page{
     width: 320px;
-    padding: 30px 22px 81px;
-    top: 0;
-    position: absolute;
+    height: 568px;
+    left: 2%;
+    top: 50%;
+
+    background: #a9a9a9;
+}
+
+.show_page2{
+    width: 320px;
+    height: 568px;
     left: 20%;
+    top: 2px;
+    position: absolute;;
+    background: #a9a9a9;
 }
 
-#container{
+#testImg {
+    width: 80px;
+    height: 80px;
+    left: 2%;
+    top: 50%;
 }
 
-#loading{
-    background: red;
+.main_img{
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    top:0;
+    left: 0;
+    cursor: move;
+}
+.ui-drag{
+    cursor: move;
 }
 
-.page1 .page_container{
-    background: rgba(0,0,0,0) url("1.jpg");
+.page-aside{
     height: 100%;
     width: 100%;
-    top: 0;
-    left: 0;
     position: absolute;
+    left: 0;
+    top: 0;
+    padding: 1px;
+}
+
+.line-v{
+    background: red;
+    height: 100%;
+    width: 1px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 1;
+}
+
+.line-h{
+    background: red;
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 1;
 }
 
 
+
+
+
+
+
+
+
+
+@media all and (min-width: 640px) {
+    body {
+        overflow: auto;
+    }
+    #index,
+    #loading,
+    #team,
+    #container {
+        width: 320px;
+        height: 568px;
+        left: 50%;
+        margin-left: -160px;
+        top: 50%;
+        margin-top: -284px;
+    }
+    .phone {
+        left: 36%;
+        top: 10%;
+        width: 320px;
+        height: 568px;
+        padding: 30px 25px 90px 25px;
+        border: 1px solid #ccc;
+        margin-left: -160px;
+        background: #fff;
+        border-radius: 10px;
+        position: absolute;
+    }
+    .phone header {
+        width: 100%;
+        position: absolute;
+        top: 20px;
+        left: 0;
+        height: 40px;
+        text-align: center;
+    }
+    .phone header .page-header-bar {
+        margin: 0 2px;
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #ccc;
+    }
+    .phone header .page-header-bar:nth-of-type(2) {
+        width: 40px;
+        border-radius: 5px;
+    }
+    .phone footer {
+        position: absolute;
+        width: 100%;
+        height: 60px;
+        left: 0;
+        text-align: center;
+        bottom: -5px;
+    }
+    .phone footer div {
+        margin-left: 160px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #ccc;
+    }
+    .operator {
+        display: block;
+        width: 500px;
+        height: 700px;
+        position: absolute;
+        left: 50%;
+        top: 10%;
+    }
+    .operator .code {
+        margin-left: 40px;
+        width: 200px;
+        text-align: center;
+    }
+    .operator .code img {
+        border: 1px solid #eee;
+        padding: 10px;
+    }
+    .operator .code a {
+        display: none;
+        margin-top: 30px;
+        display: inline-block;
+        color: #fff;
+        border-radius: 30px;
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background: #8f1e23;
+    }
+    .operator .dir div {
+        width: 73px;
+        height: 75px;
+        position: absolute;
+        border: 1px dashed #a4a4a4;
+        cursor: pointer;
+    }
+    .operator .dir div:nth-of-type(1) {
+        left: 73px;
+        top: 0;
+    }
+    .operator .dir div:nth-of-type(2) {
+        left: 0;
+        top: 75px;
+    }
+    .operator .dir div:nth-of-type(3) {
+        left: 73px;
+        top: 75px;
+    }
+    .operator .dir div:nth-of-type(4) {
+        left: 146px;
+        top: 75px;
+    }
+    .operator .dir1 div {
+        width: 72px;
+        height: 75px;
+        position: absolute;
+        border: 1px dashed #a4a4a4;
+        cursor: pointer;
+        top: 0;
+    }
+    .operator .dir1 div:nth-of-type(1) {
+        left: 0;
+    }
+    .operator .dir1 div:nth-of-type(2) {
+        left: 72.5px;
+    }
+    .operator .dir1 div:nth-of-type(3) {
+        left: 145px;
+    }
+    .operator .dir1 div:nth-of-type(4) {
+        left: 217.5px;
+    }
+}
+@media all and (max-height: 768px) and (min-width: 640px) {
+    body {
+        overflow: hidden;
+    }
+    #index,
+    #loading,
+    #team,
+    #container {
+        width: 320px;
+        height: 568px;
+        left: 50%;
+        margin-left: -160px;
+        top: 50%;
+        margin-top: -284px;
+    }
+    .operator {
+        top: 0;
+    }
+    .phone {
+        left: 36%;
+        top: 0;
+        width: 320px;
+        height: 568px;
+        padding: 27px 22px 81px 22px;
+        border: 1px solid #ccc;
+        margin-left: -160px;
+        background: #fff;
+        border-radius: 10px;
+        position: absolute;
+    }
+    .phone header {
+        width: 100%;
+        position: absolute;
+        top: 20px;
+        left: 0;
+        height: 40px;
+        text-align: center;
+    }
+    .phone header .page-header-bar {
+        margin: 0 2px;
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #ccc;
+    }
+    .phone header .page-header-bar:nth-of-type(2) {
+        width: 40px;
+        border-radius: 5px;
+    }
+    .phone footer {
+        position: absolute;
+        width: 100%;
+        height: 60px;
+        left: 0;
+        text-align: center;
+        bottom: -15px;
+    }
+    .phone footer div {
+        margin-left: 160px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #ccc;
+    }
+}
 
 
 

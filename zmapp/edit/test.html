@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #xixi {
+            width:200px; height: 200px; position:absolute;
+            left: 50px; top: 50px; background-color: lightcyan;
+        }
+        #haha {
+            position:absolute; left:300px; top:300px;
+            background-color: yellow; width:200px; height: 200px;
+        }
+
+    </style>
+    <script type="text/javascript" src="mylib.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            var obj1 = createDraggableObject();
+            var obj2 = createDraggableObject();
+            obj1.init($('xixi'));
+            obj2.init($('haha'));
+        };
+    </script>
+</head>
+<body>
+
+<div>
+    <div id="xixi">Fuck!</div>
+</div>
+
+<div>
+    <div>
+        <div id="haha">Shit!</div>
+    </div>
+</div>
+
+</body>
+</html>
