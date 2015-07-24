@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="pragram" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui, user-scalable=no">
+
+    <title></title>
+    <link rel="stylesheet" href="main.css"/>
+    <script src="../lib/jquery-1.11.3.min.js"></script>
+    <script type="application/javascript" src="../lib/qrcode.js" ></script>
+    <script type="application/javascript" src="../lib/jquery.qrcode.js" ></script>
+
+
+    <style type="text/css">
+        #div1, #div2
+        {float:left; width:100px; height:35px; margin:10px;padding:10px;border:1px solid #aaaaaa;}
+    </style>
+
+
+</head>
+<body>
+
+<article class="phone pc" id="phone">
+    <header>
+
+    </header>
+    <section>
+        <section id="container">
+            <!--<div id="loading"></div>-->
+            <section id="main">
+                <figure class="page1">
+                    <div class="page_container">
+
+                    </div>
+                </figure>
+
+                <div class="main_img" id="dialogMove" onselectstart='return false;'>
+                    <div id="dialogDrag2">
+                        <img id="img" class="main_img" src="1.jpg" alt="" draggable="false"/>
+                    </div>
+                    <aside>
+                        <div class="line-v" id="left-line-v">
+                            <div style="background: #000;width: 8px;height: 8px;border-radius: 50%;cursor: se-resize;top: -5px;left: -5px;position: absolute;"></div>
+                            <div id="left-point2" style="background: #000;width: 8px;height: 8px;border-radius: 50%;cursor: e-resize;top: 50%;left: -5px;position: absolute;"></div>
+                            <div style="background: #000;width: 8px;height: 8px;border-radius: 50%;cursor: ne-resize;bottom:-4px;left: -5px;position: absolute;"></div>
+                        </div>
+                        <div class="line-h">
+                            <div style="background: #000;width: 8px;height: 8px;border-radius: 50%;cursor: sw-resize;top: -5px;right: -5px;position: absolute;"></div>
+                            <div style="background: #000;width: 8px;height: 8px;border-radius: 50%;cursor: s-resize;top: -5px;left: 50%;position: absolute;"></div>
+                        </div>
+                    </aside>
+                </div>
+
+
+            </section>
+        </section>
+    </section>
+    <footer></footer>
+</article>
+
+
+<article class="pc operator">
+    <div class="p-qr-code" id="p-qr-code"></div>
+</article>
+
+
+<input type="button" id="addMove2"  value="add2" />
+
+<script type="text/javascript">
+
+
+
+    $(document).ready(function(){
+        $("#addMove2").on("click",function(){
+            console.log("addMove2 click...");
+        });
+
+        var oBody = $("body");
+
+        $("#dialogDrag2").on("mousedown", function () {
+            console.log("mousedown....");
+
+            var dialogInstace , onMoveStartId , mousePos = {x:0,y:0};	//	用于记录当前可拖拽的对象
+
+
+            var instace = {} ;
+//            instace.dragElement  = $("#dialogDrag2")[0];	//	允许执行 拖拽操作 的元素
+            instace.moveElement  = $("#dialogMove")[0];	//	拖拽操作时，移动的元素
+
+            instace.mouseOffsetLeft = 0;			//	拖拽操作时，移动元素的起始 X 点
+            instace.mouseOffsetTop = 0;			//	拖拽操作时，移动元素的起始 Y 点
+
+
+//            instace.dragElement.addEventListener('mousedown',myFuc);
+            var event = event || window.event;
+            dialogInstace = instace;
+            instace.mouseOffsetLeft = event.pageX - instace.moveElement.offsetLeft ;
+            instace.mouseOffsetTop  = event.pageY - instace.moveElement.offsetTop ;
+
+
+            oBody.on("mousemove",function( e ){
+                console.log("mousemove...");
+
+
+                var e = window.event || e;
+                mousePos.x = e.clientX;
+                mousePos.y = e.clientY;
+                e.stopPropagation && e.stopPropagation();
+                e.cancelBubble = true;
+                e = this.originalEvent;
+                e && ( e.preventDefault ? e.preventDefault() : e.returnValue = false );
+
+                document.body.style.MozUserSelect = 'none';
+//                var instace2 = dialogInstace;
+//                if (instace) {
+                    var dragArea = $("#phone")[0];
+                    var maxX = dragArea.clientWidth -  instace.moveElement.offsetWidth;
+                    var maxY = dragArea.clientHeight - instace.moveElement.offsetHeight ;
+
+                    instace.moveElement.style.left = Math.min( Math.max( ( mousePos.x - instace.mouseOffsetLeft) , 0 ) , maxX) + "px";
+                    instace.moveElement.style.top  = Math.min( Math.max( ( mousePos.y - instace.mouseOffsetTop ) , 0 ) , maxY) + "px";
+//                }
+            }).on("mouseup", function () {
+                console.log("mouseup...");
+
+                dialogInstace = false;
+                oBody.off("mousemove mouseup");
+            });
+        });
+
+
+
+
+        $("#left-point2").on("mousedown", function () {
+            console.log("mousedown2....");
+
+            var  onMoveStartId , mousePos = {x:0,y:0};	//	用于记录当前可拖拽的对象
+
+
+            var instace = {} ;
+//            instace.dragElement  = $("#dialogDrag2")[0];	//	允许执行 拖拽操作 的元素
+            instace.moveElement  = $("#left-line-v")[0];	//	拖拽操作时，移动的元素
+
+            instace.mouseOffsetLeft = 0;			//	拖拽操作时，移动元素的起始 X 点
+            instace.mouseOffsetTop = 0;			//	拖拽操作时，移动元素的起始 Y 点
+
+
+//            instace.dragElement.addEventListener('mousedown',myFuc);
+            var event = event || window.event;
+//            dialogInstace = instace;
+            instace.mouseOffsetLeft = event.pageX - instace.moveElement.offsetLeft ;
+            instace.mouseOffsetTop  = event.pageY - instace.moveElement.offsetTop ;
+
+
+            oBody.on("mousemove",function( e ){
+                console.log("mousemove...");
+
+
+                var e = window.event || e;
+                mousePos.x = e.clientX;
+                mousePos.y = e.clientY;
+                e.stopPropagation && e.stopPropagation();
+                e.cancelBubble = true;
+                e = this.originalEvent;
+                e && ( e.preventDefault ? e.preventDefault() : e.returnValue = false );
+
+                document.body.style.MozUserSelect = 'none';
+//                var instace2 = dialogInstace;
+//                if (instace) {
+                var dragArea = $("#phone")[0];
+                var maxX = dragArea.clientWidth -  instace.moveElement.offsetWidth;
+                var maxY = dragArea.clientHeight - instace.moveElement.offsetHeight ;
+
+                instace.moveElement.style.left = Math.min( Math.max( ( mousePos.x - instace.mouseOffsetLeft) , 0 ) , maxX) + "px";
+                instace.moveElement.style.top  = 0+"px";
+//                }
+            }).on("mouseup", function () {
+                console.log("mouseup...");
+
+                dialogInstace = false;
+                oBody.off("mousemove mouseup");
+            });
+        });
+    });
+
+</script>
+</body>
+</html>
