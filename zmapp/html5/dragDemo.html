@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽示例</title>
+</head>
+<script type="text/javascript">
+	function init () {
+		var source = document.getElementById("dragme");
+		var dest = document.getElementById("text");
+		var dragIcon = document.createElement("img");
+		dragIcon.src = "http://twivatar.org/twitter/mini";
+
+        //（1） 拖放开始
+		source.addEventListener("dragstart",function(ev){
+			var dt = ev.dataTransfer;
+			dt.effectAllowed = "all";
+
+			dt.effectAllowed = "copy";
+
+			// dt.setDragImage(dragIcon,-10,-10);
+            //（2）拖拽元素
+			dt.setData("text/plain","你好");	
+
+		},false);
+
+		dest.addEventListener("dragover",function(ev){
+			var dt = ev.dataTransfer;
+			dt.dropEffect = "copy";
+			ev.preventDefault();
+
+		},false);
+
+        //（3）拖放结束
+		dest.addEventListener("dragend",function(ev){
+			ev.preventDefault();
+		},false);
+
+
+		//4 drop：被拖放
+		dest.addEventListener("drop",function(ev){
+			var dt = ev.dataTransfer;
+			var text = dt.getData("text/plain");
+			dest.textContent += text;
+
+			ev.preventDefault();
+			ev.stopPropagation();
+		},false);
+
+	}
+
+	document.ondragover = function(e){e.preventDefault();};
+	document.ondrop = function(e){e.preventDefault();};
+</script>
+<body onload="init()">
+	<h1>简单拖拽示例</h1>
+	<div id="dragme" draggable="true" style="width:200px;border:1px solid gray;">
+		请拖拽
+	</div>
+	<div id="text" style="width:200px;height:200px;border:1px solid gray;"></div>
+</body>
+</html>

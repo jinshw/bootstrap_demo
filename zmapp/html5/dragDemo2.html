@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽示例</title>
+</head>
+<link rel="stylesheet" href="../../lib/bootstrap/3.3.4/dist/css/bootstrap.css"/>
+<script type="text/javascript" src="../lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../lib/bootstrap/3.3.4/dist/js/bootstrap.js" ></script>
+
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<style type="text/css">
+    .module-control{
+        position: absolute;
+        height: 100%;
+        width: 90%;
+        z-index: 1;
+    }
+   .module-delete{
+        position: absolute;
+        right: -2px;
+        top: -1px;
+        width: 18px;
+        height: 18px;
+        border: 1px solid #37a1ec;
+        background: #fff;
+        color: #37a1ec;
+        text-align: center;
+    }
+    .mod-button{
+        text-align: center;
+        margin: 10px;
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(function() {
+        $( "#editArea" ).sortable({
+            revert: true
+        });
+    });
+
+
+	function init () {
+		var source = document.getElementById("component_text");
+		var dest = document.getElementById("editArea");
+
+        //（1） 拖放开始
+		source.addEventListener("dragstart",function(ev){
+			var dt = ev.dataTransfer;
+			dt.effectAllowed = "all";
+
+//			dt.effectAllowed = "copy";
+
+//            var content = $("#component").html();
+//            var content = '<li><div class="row"><div class="col-md-12 text-center"><button type="button" class="btn btn-default">（默认样式）Default</button></div></div></li>';
+//            var content = '<div class="row"><div class="col-md-12 text-center"><button type="button" class="btn btn-default">（默认样式）Default</button></div></div>';
+           var content = $("#box").html();
+            console.log(content);
+            //（2）拖拽元素
+			dt.setData("text/plain",content);
+
+		},false);
+
+		dest.addEventListener("dragover",function(ev){
+			var dt = ev.dataTransfer;
+			dt.dropEffect = "copy";
+			ev.preventDefault();
+
+		},false);
+
+        //（3）拖放结束
+		dest.addEventListener("dragend",function(ev){
+			ev.preventDefault();
+		},false);
+
+
+		//4 drop：被拖放
+		dest.addEventListener("drop",function(ev){
+			var dt = ev.dataTransfer;
+			var text = dt.getData("text/plain");
+			//dest.textContent += text;
+
+            $("#editArea").append(text);
+			ev.preventDefault();
+			ev.stopPropagation();
+		},false);
+
+	}
+
+	document.ondragover = function(e){e.preventDefault();};
+	document.ondrop = function(e){e.preventDefault();};
+
+    function getHtml() {
+        alert($("#component").html());
+    }
+</script>
+<body onload="init()">
+	<h1>简单拖拽示例</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="border: 1px solid red; height: 200px;">
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#component_content" data-toggle="tab">内容</a></li>
+                    <li><a href="#component_settype" data-toggle="tab">排版</a></li>
+                    <li><a href="">营销</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="component_content" class="tab-pane active">
+                        <ul>
+                            <li id="component_text" draggable="true">
+                                <span class="glyphicon glyphicon-text-color" aria-hidden="true"></span>
+                                文本
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="component_settype" class="tab-pane">
+                        <ul>
+                            <li>
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                排版
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <div id="component">
+                <div id="dragButton" draggable="true" style="width:200px;border:1px solid gray;">
+                    请拖拽
+                </div>
+            </div>
+        </div>
+        <div id="editArea" class="col-md-8" style="border: 1px solid red; height: 200px;">
+            <!--<ul id="sortable">-->
+            <!--</ul>-->
+        </div>
+    </div>
+</div>
+
+    <div id="box">
+        <div class="row module">
+            <div class="col-md-12">
+                <div class="module-control text-right">
+                    <span class="module-delete">
+                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </span>
+                </div>
+                <div class="module-box text-center">
+                    <div class="mod-button">
+                        <button type="button" class="btn btn-default">（默认样式）Default</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
