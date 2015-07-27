@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽示例</title>
+</head>
+<link rel="stylesheet" href="../../lib/bootstrap/3.3.4/dist/css/bootstrap.css"/>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src="../lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../../lib/bootstrap/3.3.4/dist/js/bootstrap.js" ></script>
+
+<!--<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>-->
+<script type="text/javascript" src="../../lib/jquery-ui-1.11.0.custom/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+
+    $(function() {
+       /* $( "#editArea" ).sortable({
+            revert: true,
+            handle:".module-move"
+        });*/
+
+//        $(".module").sortable({handle:".module-move"});
+
+//        $(".module-delete").parent().parent().parent(".module").remove();
+        $(".module-delete").click(function () {
+            $(this).parent().parent().parent(".module").remove();
+        });
+    });
+
+
+	function init () {
+//		var source = document.getElementById("component_text");
+//		var dest = document.getElementById("editArea");
+		var source = $("#component_text");
+		var dest = $("#editArea");
+
+        source.draggable({
+            appendTo:"body",
+            helper:"clone"
+        });
+        dest.droppable({
+            accept: ":not(.ui-sortable-helper)",
+            drop: function (event,ui) {
+                var content = $("#box-button").html();
+//                content.appendTo(this);
+                $(this).append(content);
+                console.log(content);
+
+
+                $(".module-delete").click(function () {
+                    $(this).parent().parent().parent(".module").remove();
+                });
+            }
+        }).sortable({
+            revert: true,
+            handle:".module-move"
+        });
+	}
+
+	document.ondragover = function(e){e.preventDefault();};
+	document.ondrop = function(e){e.preventDefault();};
+
+    function getHtml() {
+        alert($("#component").html());
+    }
+</script>
+<body onload="init()">
+	<h1>简单拖拽示例</h1>
+
+<div class="container">
+    <div class="row">
+        <!-- 组件区 start-->
+        <div class="col-md-4" style="border: 1px solid red; height: 200px;">
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#component_content" data-toggle="tab">内容</a></li>
+                    <li><a href="#component_settype" data-toggle="tab">排版</a></li>
+                    <li><a href="">营销</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="component_content" class="tab-pane active">
+                        <ul>
+                            <li draggable="true">
+                                <p>
+                                    <span class="glyphicon glyphicon-text-color com-icon" aria-hidden="true"></span>
+                                </p>
+                                文本
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="component_settype" class="tab-pane">
+                        <ul>
+                            <li>
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                排版
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- 组件区 end-->
+        <!-- 展示区 start-->
+        <div id="editArea" class="col-md-8" style="border: 1px solid red; height: 200px;">
+            <!--<ul id="sortable">-->
+            <!--</ul>-->
+        </div>
+        <!-- 展示区 end-->
+    </div>
+</div>
+
+<div id="box" style="display: none;">
+    <div id="box-button">
+        <div class="row module">
+            <div class="col-md-12">
+                <div class="module-control text-right">
+                <span class="module-move">
+                    <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                </span>
+                <span class="module-delete">
+                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </span>
+                </div>
+                <div class="module-box text-center">
+                    <div class="mod-button">
+                        <button type="button" class="btn btn-default">（默认样式）Default</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

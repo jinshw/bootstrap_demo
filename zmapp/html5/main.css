@@ -1,0 +1,61 @@
+.module:hover{
+    border: 1px solid #0000ff;
+}
+.module:hover > .col-md-12 > .module-control {
+    display: block;
+}
+
+.module-control{
+    position: absolute;
+    height: 1px;
+    width: 90%;
+    z-index: 1;
+    display: none;
+}
+.module-delete{
+    position: absolute;
+    right: -2px;
+    top: -1px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #37a1ec;
+    background: #fff;
+    color: #37a1ec;
+    text-align: center;
+}
+.module-move{
+    position: absolute;
+    left: 50%;
+    top: -1px;
+    width: 55px;
+    height: 18px;
+    border: 1px solid #37a1ec;
+    background: #fff;
+    color: #37a1ec;
+    text-align: center;
+}
+.mod-button{
+    text-align: center;
+    margin: 10px;
+}
+
+.com-icon{
+    font-size: 44px;
+}
+.tab-content ul{
+    list-style-type: none;
+}
+.tab-content ul li{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: top;
+    cursor: move;
+    font-size: 14px;
+    float: left;
+    padding: 0px;
+    margin: -1px -1px 0 0;
+
+}
