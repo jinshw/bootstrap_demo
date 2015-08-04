@@ -161,7 +161,7 @@ body{
 
 .title_right{
     width: 20%;
-    float: left;
+    float: right;
     line-height: 35px;
     text-align: right;
 }
@@ -239,4 +239,31 @@ body{
 
 .service{
     border: 1px solid #E8E8E8;
+}
+
+.copyright{
+    width: 100%;
+    height: 200px;
+    background-color: #E8E8E8;
+    margin-top: 10px;
+}
+.copyright_content{
+    width: 1000px;
+    height: 180px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+.copyright_content li{
+    list-style-type: none;
+    float: left;
+    width: 200px;
+    text-align: center;
+    background: url("../images/line.png") no-repeat right center;
+    font-size: 18px;
+    font-family: "微软雅黑";
+    line-height: 30px;
+    color: #999;
+}
+.copyright_content li ul li {
+    font-size: 14px;
 }
