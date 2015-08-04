@@ -116,3 +116,91 @@ body{
     border: 1px solid #fff;
 
 }
+.ad{
+    height: 310px;
+    overflow: hidden;
+}
+
+.main{
+    height: 250px;
+    margin-top: 5px;
+}
+.news{
+    width: 340px;
+    border: 1px solid #E8E8E8;
+}
+.course{
+    width: 410px;
+    border: 1px solid #E8E8E8;
+    background-color: #FF6;
+    margin: 0 7px;
+}
+.sidebar{
+    width: 230px;
+    background-color: #0000ff;
+}
+.news,.course,.sidebar{
+    height: 250px;
+    float: left;
+}
+
+.title{
+    height: 35px;
+    border-bottom: 2px solid #e8e8e8;
+}
+.title_left{
+    width: 70%;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    font-weight: bold;
+    color: #786F66;
+    float: left;
+    line-height: 35px;
+    padding-left: 20px;
+}
+
+.title_right{
+    width: 20%;
+    float: left;
+    line-height: 35px;
+}
+.title_right a{
+    text-decoration: none;
+    color: #999999;
+}
+.pic_news{
+    height: 80px;
+    margin-top:10px;
+    line-height: 22px;
+}
+.pic_news img{
+    float: left;
+    margin: 0 5px;
+}
+.pic_news a{
+    color: #C00;
+    text-decoration: none;
+}
+
+.news_list{
+    margin-top: 20px;
+}
+.news_list li{
+    list-style-type: none;
+    background: url("../images/list.jpg") no-repeat;
+    padding-left: 10px;
+    margin: 8px 8px;
+    border-bottom: 1px dotted #CCCCCC;
+}
+.news_list li a:link,.news_list li a:visited{
+    text-decoration: none;
+    color: #000;
+}
+.news_list li a:hover,.news_list li a:active{
+    text-decoration: none;
+    color: #C00;
+}
+.news_list li span{
+    color: #999;
+    float: right;
+}
