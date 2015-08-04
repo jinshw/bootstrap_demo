@@ -124,22 +124,22 @@ body{
 .main{
     height: 250px;
     margin-top: 5px;
+    background-color: #FFF;
 }
 .news{
     width: 340px;
     border: 1px solid #E8E8E8;
 }
-.course{
+.products{
     width: 410px;
     border: 1px solid #E8E8E8;
-    background-color: #FF6;
     margin: 0 7px;
 }
 .sidebar{
     width: 230px;
-    background-color: #0000ff;
+    /*border: 1px solid #E8E8E8;*/
 }
-.news,.course,.sidebar{
+.news,.products,.sidebar{
     height: 250px;
     float: left;
 }
@@ -163,21 +163,26 @@ body{
     width: 20%;
     float: left;
     line-height: 35px;
+    text-align: right;
 }
 .title_right a{
     text-decoration: none;
     color: #999999;
+    font-size: 10px;
+    font-family: "宋体";
+    font-weight: normal;
+    padding-right: 10px;
 }
 .pic_news{
     height: 80px;
     margin-top:10px;
     line-height: 22px;
 }
-.pic_news img{
+.pic_news img,.product_list img{
     float: left;
     margin: 0 5px;
 }
-.pic_news a{
+.pic_news a,.product_list a{
     color: #C00;
     text-decoration: none;
 }
@@ -203,4 +208,35 @@ body{
 .news_list li span{
     color: #999;
     float: right;
+}
+
+.product_list {
+    height: 120px;
+    margin-top: 10px;
+    line-height: 22px;
+}
+.product_type {
+    width: 372px;
+    height: 37px;
+    background: url(../images/product_type_bg.jpg) no-repeat;
+    margin: 20px auto;
+}
+
+.product_type li {
+    list-style-type: none;
+    float: left;
+    line-height: 37px;
+    /*	width:65px;
+*/	text-align: center;
+    margin: 0 15px;
+}
+
+.video{
+    height: 185px;
+    margin-bottom: 10px;
+    border: 1px solid #E8E8E8;
+}
+
+.service{
+    border: 1px solid #E8E8E8;
 }

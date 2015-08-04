@@ -8,7 +8,7 @@
 .module-control{
     position: absolute;
     height: 1px;
-    width: 90%;
+    width: 100%;
     z-index: 1;
     display: none;
 }
@@ -22,6 +22,7 @@
     background: #fff;
     color: #37a1ec;
     text-align: center;
+    margin-right: 15px;
 }
 .module-move{
     position: absolute;
