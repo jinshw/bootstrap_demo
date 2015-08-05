@@ -29,3 +29,83 @@ h1,h3,p,a,button{
 .headfontsize p{
     color: #ffffff;
 }
+
+.twopage{
+    padding: 2px 0 0 2px;
+    height: auto;
+    /*background-image: url("images");*/
+    position: relative;
+    background-color:#E3E5E2;
+}
+.twopage-text{
+    width: 100%;
+    text-align: center;
+}
+.twopage-text-h1{
+    margin-left: 120px;
+    letter-spacing:2px ;
+    margin-top: 80px;
+    margin-bottom: 0;
+    padding: 20px 0 0 0;
+}
+.twopage-text-h1 img{
+    width: 120px;
+    margin-top: -20px;
+}
+.twopage .row{
+    margin-right:0px ;
+    margin-left: 0px;
+}
+.twopage-courses{
+    float: left;
+    background-color: #ffffff;
+    padding: 0 2px 2px 0;
+    position: relative;
+    overflow: hidden;
+}
+.twopage-courses >a{
+    width: 100%;
+    height: 100%;
+    float: left;
+    position: relative;
+    text-align: center;
+}
+.classicon h3{
+    margin-top: 120px;
+    color: #d1e973;
+}
+.classicon h1{
+    color: #fff5e1;
+}
+.classicon{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    opacity: 0;
+}
+.classicon:hover{
+    background: #1eb450;
+    opacity: 0.9;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+.twopagebtn{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.twopagebtn .btn-lg{
+    font-size: 25px;
+}
+#twopage-easy{
+    margin: 50px 0;
+    margin-bottom: 100px;
+}
+
+
