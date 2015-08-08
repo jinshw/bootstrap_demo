@@ -7,7 +7,15 @@
     <link rel="stylesheet" href="app.css"/>
 </head>
 <body>
-    <div class="onepage">
+<div class="side-nav" role="navigation">
+    <ul class="nav-side-nav">
+        <li><a href="#onepage" class="tooltip-side-nav"></a></li>
+        <li><a href="#twopage" class="tooltip-side-nav"></a></li>
+        <li><a href="#threepage" class="tooltip-side-nav"></a></li>
+        <li><a href="#fourpage" class="tooltip-side-nav"></a></li>
+    </ul>
+</div>
+    <div class="onepage" id="onepage">
         <div class="onepage-bg" id="onepagebg"></div>
         <div class="container">
             <div class="row">
@@ -30,7 +38,7 @@
         </div>
     </div>
     <!--onepage结束-->
-    <div class="twopage">
+    <div class="twopage" id="twopage">
         <div class="twopage-text">
             <h1 class="twopage-text-h1">
                 选择你的第一节课程进行学习 <img src="images/minPhone.jpg" alt=""/>
@@ -69,5 +77,54 @@
             <a href="#" id="twopage-easy" class="btn btn-success btn-lg">如果你想学习，快快点这里</a>
         </div>
     </div>
+
+    <div class="threepage" id="threepage">
+        <div class="threepage-bg" id="threepagebg">
+            <div class="threepagecontent">
+                <div class="threepagetext">
+                    <h1>为什么要学习编程思想</h1>
+                    <p>只要你有耐心，相信程序对你而言，小菜一碟，你一定是可以顺利拿下的只要你有耐心，</p>
+                    <p>相信程序对你而言，小菜一碟，你一定是可以顺利拿下的只要你有耐心，
+                    <p>  相信程序对你而言，小菜一碟，</p>
+                    <p>你一定是可以顺利拿下的</p>
+                </div>
+                <a href="#" class="btn btn-success btn-lg threepagebtncontent">快速注册，要干活了</a>
+            </div>
+        </div>
+    </div>
+    <!--threepage结束-->
+    <div class="fourpage" id="fourpage">
+        <div class="container" style="width: 70%">
+            <div class="coursexingqing-text">
+                <h1>要干活，必须工具到位</h1>
+                <p>怎样才能做到最快的学习呢，你猜呢？</p>
+            </div>
+            <div id="carousel-example-generic" class="carousel slide" data-interval="5000" style="height: 300px;">
+                <ol class="carousel-indicators" style="margin-top: 200px">
+                    <li data-target="#carousel-example-generic" data-slide="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide="1" class=""></li>
+                    <li data-target="#carousel-example-generic" data-slide="2" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active" style="width: 500px">
+                        <img src="images/008.jpg" alt=""/>
+                    </div>
+                    <div class="item" style="width: 500px">
+                        <img src="images/009.jpg" alt=""/>
+                    </div>
+                    <div class="item" style="width: 500px">
+                        <img src="images/013.jpg" alt=""/>
+                    </div>
+                </div>
+                <a href="#carousel-example-generic" class="left carousel-control" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a href="#carousel-example-generic" class="right carousel-control" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
