@@ -10,4 +10,12 @@ myDM.directive("myDirective",function(){
     };
 });
 
+function add(){
+    var text = ' <input type="text" class="input-sm" ng-model="user.username"/> <p>{{user.username}}</p>';
+    $("#add").append(text);
+    $compile($("#add").contents())(scope);
+}
+
+
+
 

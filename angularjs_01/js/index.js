@@ -47,11 +47,34 @@ myApp.directive("myDirective",function(){
     };
 });
 
-myApp.controller("simpleCtrl",["$scope",function($scope){
+myApp.controller("simpleCtrl",["$compile","$scope",function($compile,$scope){
     $scope.user={
-        username:"jinshw",
+        username:"张三",
         password:"123456"
-    }
+    };
+    $scope.userList=[{
+        username:"张三11",
+        password:"123456"
+    },{
+        username:"张三22",
+        password:"123456"
+    }];
+
+    $scope.clickme = function() {// clickme 事件
+        $scope.userList.push({
+            username:"张三333",
+            password:"123456"
+        });
+
+//        var text = ' <input type="text" class="input-sm" ng-model="user.username"/> <p>{{user.username}}</p>';
+//        $("#add").append(text);
+        var text = ' <input type="text" class="input-sm" ng-model="user.username"/> <p>{{user.username}}</p>';
+        $("#add").append(
+            $compile(text)($scope)
+        );
+//        $compile($("#add").contents())(scope);
+    };
+
 }]);
 
 myApp.controller("MyCtrl",["$scope",function($scope){
