@@ -5,9 +5,11 @@
 
 
 require.config({
+    baseUrl:"js",
     paths : {
-        "jquery" : ["http://libs.baidu.com/jquery/2.0.3/jquery"],
-        "a" : "a"
+        "jquery" : ["lib/jquery-1.11.3.min"],
+        "a" : "a",
+        "math":"math"
     }
 })
 
@@ -17,5 +19,8 @@ require(["jquery","a"],function($){
     })
 })
 
+require(["math"],function(math){
+    alert(math.add(10,3));
+})
 
 
