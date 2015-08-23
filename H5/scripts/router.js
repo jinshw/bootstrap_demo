@@ -11,14 +11,12 @@ define(["app"],
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams
             }
-        ])
-            .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $uiViewScrollProvider) {
+        ]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $uiViewScrollProvider) {
                 //用于改变state时跳至顶部
                 $uiViewScrollProvider.useAnchorScroll();
                 // 默认进入先重定向
                 $urlRouterProvider.otherwise('/home');
-                $stateProvider
-                    .state('home', {
+                $stateProvider.state('home', {
                         //abstract: true,
                         url: '/home',
                         views: {
@@ -26,6 +24,9 @@ define(["app"],
                                 templateUrl: '../view/home.html'
                             }
                         }
+                    }).state("tab", {
+                        url: "/tab",
+                        templateUrl: "tab.html"
                     })
             })
     });

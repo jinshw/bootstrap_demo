@@ -11,8 +11,11 @@ require.config({
         //js文件
         'bootstrap': "../scripts/bootstrap",
         'app': "../scripts/app",
-        'router': "../scripts/router"
+        'router': "../scripts/router",
          //    .....以及其他的js文件，这里省略
+        'controller1':"../scripts/controller/controller1",
+        'controller2':"../scripts/controller/controller2",
+        'module':"../scripts/controller/module"
 },
 shim:{
     'angular':{
@@ -20,7 +23,7 @@ shim:{
     },
     'angular-route':{
         deps:['angular'],
-            exports: 'angular-route'
+        exports: 'angular-route'
     }
 },
 deps:['bootstrap'],

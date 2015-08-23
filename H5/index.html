@@ -4,9 +4,27 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <link rel="stylesheet" href="../lib/bootstrap/3.3.4/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="../lib/font-awesome/font-awesome-4.3.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="../lib/css/ghost.css"/>
     </head>
 
-<body>
+<body ng-app="myApp" class="home-template">
+    <!-- start header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="#">
+                        <img src="http://static.ghostchina.com/image/b/46/4f5566c1f7bc28b3f7ac1fada8abe.png" alt="Ghost 教程"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+
+    <div ui-view=""></div>
     <!--其他html内容-->
     <script type='text/javascript' src='scripts/lib/require.js' data-main='scripts/main.js'></script>
 </body>
