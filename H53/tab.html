@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<link rel="stylesheet" href="../lib/bootstrap/3.3.4/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../lib/font-awesome/font-awesome-4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../lib/css/ghost.css"/>-->
+</head>
+<body>
+<!--<div>
+    <div>
+        <span style="width:100px" ui-sref=".Page1">
+            <a href="">Page-1</a>
+        </span>
+        <span style="width:100px" ui-sref=".Page2">
+            <a href="">Page-2</a>
+        </span>
+        <span style="width:100px" ui-sref=".Page3">
+            <a href="">Page-3</a>
+        </span>
+    </div>
+    <div>
+        <div ui-view=""/>
+    </div>
+</div>-->
+<!--start navigation-->
+<nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header">
+                    <span class="navbar-toggle collapse" data-toggle="collapse" data-target="#main-menu"></span>
+                    <span class="sr-only">导航条</span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        <li class="nav-current">
+                            <a href="#" ui-sref=".FirstPage">首页</a>
+                        </li>
+                        <li>
+                            <a href="#" ui-sref=".angular_example">AngularJS事例</a>
+                        </li>
+                        <li>
+                            <a href="#" ui-sref=".Page2">快捷手册</a>
+                        </li>
+                        <li>
+                            <a href="#" ui-sref=".simple">中文文档</a>
+                        </li>
+                        <li>
+                            <a href="#">下载</a>
+                        </li>
+                        <li>
+                            <a href="#">关于</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!--end navigation-->
+<div ui-view=""/>
+
+</body>
+</html>
