@@ -3,5 +3,5 @@
  */
 define(['angular'], function (angular) {
     'use strict';
-    return angular.module('webapp.controllers', []);
+    return angular.module('webapp.controllers', ["ui.router"]);
 });
