@@ -7,7 +7,9 @@ require.config({
         angularUiRoute: '../../lib/angular-1.2.20/angular-ui-router',
         angularRoute: '../../lib/angular-1.2.20/angular-route',
         angularMocks: '../../lib/angular-1.2.20/angular-mocks',
-        text: '../../bower_components/requirejs-text/text'
+        text: '../../bower_components/requirejs-text/text',
+        echarts:'../../lib/echarts-2.2.7/build/dist/echarts',
+"echarts/chart/bar":'../../lib/echarts-2.2.7/build/dist/chart/bar'
     },
     shim: {
         'angular' : {'exports' : 'angular'},
@@ -32,7 +34,8 @@ window.name = "NG_DEFER_BOOTSTRAP!";
 require( [
     'angular',
     'app',
-    'routes'
+    'routes',
+    'echartsdemo'
 ], function(angular, app, routes) {
     'use strict';
     var $html = angular.element(document.getElementsByTagName('html')[0]);
@@ -40,4 +43,7 @@ require( [
     angular.element().ready(function() {
         angular.resumeBootstrap([app['name']]);
     });
+
+
+
 });

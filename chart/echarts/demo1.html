@@ -6,13 +6,14 @@
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="height:400px"></div>
+    <div id="bar" style="height:400px;width: 400px;border: 1px solid #000000;float: left;"></div>
+    <div id="line" style="height:400px;width: 400px;border: 1px solid #000000;float: left;"></div>
     <!-- ECharts单文件引入 -->
-    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script src="../../lib/echarts-2.2.7/build/dist/echarts.js"></script>
     <script type="text/javascript">
         require.config({
             paths:{
-                echarts:'http://echarts.baidu.com/build/dist'
+                echarts:'../../lib/echarts-2.2.7/build/dist'
             }
         });
 
@@ -25,7 +26,7 @@
                 ],
                 function (ec) {
                     // 基于准备好的dom，初始化echarts图表
-                    var myChart = ec.init(document.getElementById('main'));
+                    var myChart = ec.init(document.getElementById('bar'));
 
                     var option = {
                         tooltip: {
@@ -37,7 +38,7 @@
                         xAxis : [
                             {
                                 type : 'category',
-                                data : ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                                data : ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子","手巾"]
                             }
                         ],
                         yAxis : [
