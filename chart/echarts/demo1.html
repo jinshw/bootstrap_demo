@@ -32,7 +32,7 @@
                             show: true
                         },
                         legend: {
-                            data:['销量']
+                            data:['销量','产量']
                         },
                         xAxis : [
                             {
@@ -48,6 +48,11 @@
                         series : [
                             {
                                 "name":"销量",
+                                "type":"bar",
+                                "data":[5, 20, 40, 10, 10, 20]
+                            },
+                            {
+                                "name":"产量",
                                 "type":"bar",
                                 "data":[5, 20, 40, 10, 10, 20]
                             }
