@@ -35,6 +35,8 @@ require( [
     'angular',
     'app',
     'routes',
+    'echarts',
+    "echarts/chart/bar",
     'echartsdemo'
 ], function(angular, app, routes) {
     'use strict';

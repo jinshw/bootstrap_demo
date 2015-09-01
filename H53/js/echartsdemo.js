@@ -7,7 +7,7 @@ define( [
     ],
     function (ec) {
         'use strict';
-         return   function(){
+            function barTU(){
 
 
             // 基于准备好的dom，初始化echarts图表
@@ -48,5 +48,7 @@ define( [
             // 为echarts对象加载数据
             myChart.setOption(option);
         }
+
+        return barTU;
     }
 );
