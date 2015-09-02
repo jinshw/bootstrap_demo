@@ -8,8 +8,8 @@ require.config({
         angularRoute: '../../lib/angular-1.2.20/angular-route',
         angularMocks: '../../lib/angular-1.2.20/angular-mocks',
         text: '../../bower_components/requirejs-text/text',
-        echarts:'../../lib/echarts-2.2.7/build/dist/echarts',
-"echarts/chart/bar":'../../lib/echarts-2.2.7/build/dist/chart/bar'
+        echarts:'../../lib/echarts-2.2.7/build/dist/echarts-all',
+        bardemo:'echartsdemo/bardemo'
     },
     shim: {
         'angular' : {'exports' : 'angular'},
@@ -34,18 +34,18 @@ window.name = "NG_DEFER_BOOTSTRAP!";
 require( [
     'angular',
     'app',
-    'routes',
-    'echarts',
-    "echarts/chart/bar",
-    'echartsdemo'
-], function(angular, app, routes) {
+    'routes'
+], function(angular, app, routes ) {//在function（）中echarts不能传递参数，因为echarts不符合AMD规范
     'use strict';
+
     var $html = angular.element(document.getElementsByTagName('html')[0]);
+
+//    alert(document.getElementById('bar'));
+//    echartsdemo.barTU();
 
     angular.element().ready(function() {
         angular.resumeBootstrap([app['name']]);
     });
-
 
 
 });

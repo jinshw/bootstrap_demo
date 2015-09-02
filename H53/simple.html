@@ -3,11 +3,11 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="../lib/bootstrap/3.3.4/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../lib/font-awesome/font-awesome-4.3.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="../lib/css/ghost.css"/>
-    <link rel="stylesheet" href="css/ngclass.css"/>
-    <script type="text/javascript" src="../lib/angular-1.2.20/angular.js"></script>
+    <!--<link rel="stylesheet" href="../lib/bootstrap/3.3.4/dist/css/bootstrap.min.css"/>-->
+    <!--<link rel="stylesheet" href="../lib/font-awesome/font-awesome-4.3.0/css/font-awesome.min.css"/>-->
+    <!--<link rel="stylesheet" href="../lib/css/ghost.css"/>-->
+    <!--<link rel="stylesheet" href="css/ngclass.css"/>-->
+    <!--<script type="text/javascript" src="../lib/angular-1.2.20/angular.js"></script>-->
 </head>
 <body>
 <div class="container" ng-controller="simpleCtrl">
@@ -17,12 +17,13 @@
 <hr>
     <!--<button name="clickme" ng-click="clickme()">clickMe</button>-->
     <button name="clickme" ng-click="clickme()">clickMe</button>
+    <div  contenteditable="true" ng-model="user.username"></div>
 
     <!--<div id="add" ng-repeat="users in userList">-->
         <!--<p>{{users.username}}</p>-->
     <!--</div>-->
     <div id="add"></div>
 </div>
-<script src="js/angular_example.js"></script>
+<!--<script src="js/angular_example.js"></script>-->
 </body>
 </html>

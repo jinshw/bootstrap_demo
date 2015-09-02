@@ -2,16 +2,17 @@
  * Created by JINSHW on 2015-09-01.
  */
 define( [
-        'echarts',
-        'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+        'echarts'
     ],
-    function (ec) {
+    function () {
         'use strict';
-            function barTU(){
+           var barTU = function (obj){
 
 
             // 基于准备好的dom，初始化echarts图表
-            var myChart = ec.init(document.getElementById('bar'));
+//            var myChart = echarts.init(document.getElementById('bar'));
+               console.log(echarts);
+            var myChart = echarts.init(obj);
 
             var option = {
                 tooltip: {
@@ -49,6 +50,8 @@ define( [
             myChart.setOption(option);
         }
 
-        return barTU;
+        return {
+            barTU:barTU
+        };
     }
 );

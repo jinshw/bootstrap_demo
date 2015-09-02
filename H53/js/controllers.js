@@ -1,13 +1,14 @@
 /**
  * Created by JINSHW on 2015-08-25.
  */
-define(['angular', 'services'], function (angular) {
+define(['angular', 'services','bardemo'],
+    function (angular,services,bardemo) {
     'use strict';
 
     /* Controllers */
 
     return angular.module('myApp.controllers', ['myApp.services'])
-        // Sample controller where service is being used
+        // Sample controller where service is being useds
         .controller('MyCtrl1', ['$scope', 'version', function ($scope, version) {
             $scope.scopedAppVersion = version;
         }])
@@ -112,7 +113,19 @@ define(['angular', 'services'], function (angular) {
                         },350);
                     }
                 })
-            }]);
+            }])
+        .controller("echartsCtrl",["$compile","$scope",function($compile,$scope){
+            var bar = document.getElementById('bar');
+            var line = document.getElementById('line');
+            var pie = document.getElementById('pie');
+            var scatter = document.getElementById('scatter');
+
+            bardemo.barTU(bar);
+            bardemo.lineTU(line);
+            bardemo.pieTU(pie);
+            bardemo.scatterTU(scatter);
+        }])
+        ;
     /******************Service End*********************/
 
 });
