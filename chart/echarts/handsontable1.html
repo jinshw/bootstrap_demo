@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style type="text/css">
+        body {
+            background: white;
+            margin: 20px;
+        }
+        h2 {
+            margin: 20px 0;
+        }
+
+    </style>
+    <!--<link href="http://handsontable.com//styles/main.css" rel="stylesheet">-->
+    <!--<link href="http://handsontable.com//bower_components/handsontable/dist/handsontable.full.min.css" rel="stylesheet">-->
+
+    <link rel="stylesheet" href="../../lib/handsontable-0.17.0/dist/handsontable.full.min.css"/>
+
+    <!--<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>-->
+    <!--<script src="http://handsontable.com//bower_components/handsontable/dist/handsontable.full.min.js"></script>-->
+
+    <script src="../../lib/jquery/jquery-1.11.3.min.js"></script>
+    <script src="../../lib/handsontable-0.17.0/dist/handsontable.full.min.js"></script>
+    <script src="../../lib/handsontable-0.17.0/src/dataMap.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        var ar;
+        var hot;
+        var dm;
+        $(document).ready(function () {
+            var container = document.getElementById('basic_example');
+
+            var data = function () {
+                return Handsontable.helper.createSpreadsheetData(100, 12);
+            };
+
+            var dataArr = [
+                ['', 'Kia', 'Nissan', 'Toyota', 'Honda'],
+                ['2013', 10, 11, 12, 13],
+                ['2014', 20, 11, 14, 13],
+                ['2015', 30, 15, 12, 13]
+            ];
+
+             hot = new Handsontable(container, {
+//                data: data(),
+                data:dataArr,
+                minRows:5,
+                minCols:6,
+                height: 396,
+                colHeaders: true,
+                rowHeaders: true,
+                stretchH: 'all',
+                columnSorting: true,
+                contextMenu: true
+            });
+
+            ar = hot.getData();
+            console.log(ar);
+        });
+
+
+
+    </script>
+
+    </head>
+<body>
+<div id="basic_example"></div>
+</body>
+</html>

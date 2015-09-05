@@ -3,14 +3,38 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+
+    <link rel="stylesheet" href="../../lib/handsontable-0.17.0/dist/handsontable.full.min.css"/>
+    <script src="../../lib/jquery/jquery-1.11.3.min.js"></script>
+    <script src="../../lib/handsontable-0.17.0/dist/handsontable.full.min.js"></script>
+    <style type="text/css">
+        body {
+            background: white;
+            margin: 20px;
+        }
+        h2 {
+            margin: 20px 0;
+        }
+
+    </style>
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+
+    <div  style="height:400px;width: 400px;border: 1px solid #000000;float: left;">
+        <div id="basic_example"></div>
+        <button id="flash">刷新</button>
+    </div>
+
     <div id="bar" style="height:400px;width: 400px;border: 1px solid #000000;float: left;"></div>
     <div id="line" style="height:400px;width: 400px;border: 1px solid #000000;float: left;"></div>
     <!-- ECharts单文件引入 -->
     <script src="../../lib/echarts-2.2.7/build/dist/echarts.js"></script>
     <script type="text/javascript">
+
+        var ar;
+        var hot;
+
         require.config({
             paths:{
                 echarts:'../../lib/echarts-2.2.7/build/dist'
@@ -62,8 +86,140 @@
 
                     // 为echarts对象加载数据
                     myChart.setOption(option);
+
+
+
+                    var container = document.getElementById('basic_example');
+
+                    var data = function () {
+                        return Handsontable.helper.createSpreadsheetData(100, 12);
+                    };
+
+                    var dataArr = [
+                        ['', 'Kia', 'Nissan', 'Toyota', 'Honda'],
+                        ['2013', 10, 11, 12, 13],
+                        ['2014', 20, 11, 14, 13],
+                        ['2015', 30, 15, 12, 13]
+                    ];
+
+                    hot = new Handsontable(container, {
+//                data: data(),
+                        data:dataArr,
+                        minRows:5,
+                        minCols:6,
+                        height: 396,
+                        colHeaders: true,
+                        rowHeaders: true,
+                        stretchH: 'all',
+                        columnSorting: true,
+                        contextMenu: true
+                    });
+
+                    ar = hot.getData();
+                    console.log(ar);
+
+                    //刷新按钮
+                    $('#flash').click(function(){
+                        //获取表格二维数组
+                        var dataArr = hot.getData();
+                        console.log(dataArr);
+
+                        var dataCol_1 =hot.getDataAtCol(0);
+                        var cols_1 = dataCol_1.slice(1,dataCol_1.length);
+                        var cols_11 = cols_1.map(function(x){
+                            if(x == null){
+                                return "-";
+                            }else{
+                                return x;
+                            }
+                        });
+
+                        var dataRow_1 = hot.getDataAtRow(0);
+                        var row_1 = dataRow_1.slice(1,dataRow_1.length);
+                        var row_11 = row_1.map(function(x){
+                            if(x == null){
+                                return "-";
+                            }else{
+                                return x;
+                            }
+                        });
+
+                        var series = new Array();
+                        var temp;
+                        var colsTemp;
+                        for(var i=1;i<dataArr[0].length;i++){
+                            temp = new Object();
+                            colsTemp = hot.getDataAtCol(i);
+                            if(colsTemp[0] == null || colsTemp[0] == undefined){
+                                temp.name = "jinshw";
+                            }else{
+                                temp.name = colsTemp[0];
+                            }
+
+                            temp.type="bar";
+                            if(hot.isEmptyCol(i)){//列为空
+                                temp.data =  colsTemp.slice(1,colsTemp.length);
+                            }else{
+                                temp.data =  colsTemp.slice(1,colsTemp.length);
+                            }
+                            temp.data = temp.data.map(function(x){
+                                if(x == null){
+                                    return "0";
+                                }else{
+                                    return x;
+                                }
+                            });
+
+                            series.push(temp);
+                        }
+                        console.log(row_11);
+                        console.log(series);
+
+                        option = {
+                            tooltip: {
+                                show: true
+                            },
+                            legend: {
+                                data:row_11
+//                                data:['销量','产量']
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+//                                    data : ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子","手巾"]
+                                    data : cols_11
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
+                            series :
+                                    series
+                          /*  [
+                                {
+                                    "name":"销量",
+                                    "type":"bar",
+                                    "data":[5, 20, 40, 10, 10, 20]
+                                },
+                                {
+                                    "name":"产量",
+                                    "type":"bar",
+                                    "data":[5, 20, 40, 10, 10, 2]
+                                }
+                            ]*/
+                        };
+
+                        myChart = ec.init(document.getElementById('bar'));
+                        // 为echarts对象加载数据
+                        myChart.setOption(option);
+
+                    });
+
                 }
         );
+
 
 
     </script>
