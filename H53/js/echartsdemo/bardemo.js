@@ -73,6 +73,16 @@ define( [
                 legend: {
                     data:['销量','产量']
                 },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['bar', 'line']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
                 xAxis : [
                     {
                         type : 'category',

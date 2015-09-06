@@ -24,7 +24,6 @@
 
     <script src="../../lib/jquery/jquery-1.11.3.min.js"></script>
     <script src="../../lib/handsontable-0.17.0/dist/handsontable.full.min.js"></script>
-    <script src="../../lib/handsontable-0.17.0/src/dataMap.js"></script>
 
 
 
@@ -62,6 +61,22 @@
 
             ar = hot.getData();
             console.log(ar);
+            console.log(ar.length);
+            console.log(ar[0].length);
+
+            //获取最大下标
+            var tempArr;
+            var maxI = 0;
+            var maxJ = 0;
+            for(var i=0;i<ar.length;i++){
+                tempArr = ar[i];
+                for(var j=0;j<tempArr.length;j++){
+
+                }
+
+            }
+
+
         });
 
 
