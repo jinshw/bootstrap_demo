@@ -124,8 +124,34 @@
                         var dataArr = hot.getData();
                         console.log(dataArr);
 
+                        //获取最大下标
+                        var tempArr;
+                        var maxI = 0;
+                        var maxJ = 0;
+                        for(var i=0;i<dataArr.length;i++){
+                            tempArr = dataArr[i];
+                            for(var j=0;j<tempArr.length;j++){
+                                if(dataArr[i][j] == null){
+
+                                }else{
+                                    if(i > maxI){
+                                        maxI = i;
+                                    }
+                                    if(j > maxJ){
+                                        maxJ = j;
+                                    }
+                                }
+                            }
+
+                        }
+
+                        console.log(hot.getData(maxI,maxJ));
+
+
+
                         var dataCol_1 =hot.getDataAtCol(0);
-                        var cols_1 = dataCol_1.slice(1,dataCol_1.length);
+//                        var cols_1 = dataCol_1.slice(1,dataCol_1.length);
+                        var cols_1 = dataCol_1.slice(1,maxI+1);
                         var cols_11 = cols_1.map(function(x){
                             if(x == null){
                                 return "-";
@@ -135,7 +161,8 @@
                         });
 
                         var dataRow_1 = hot.getDataAtRow(0);
-                        var row_1 = dataRow_1.slice(1,dataRow_1.length);
+//                        var row_1 = dataRow_1.slice(1,dataRow_1.length);
+                        var row_1 = dataRow_1.slice(1,maxJ+1);
                         var row_11 = row_1.map(function(x){
                             if(x == null){
                                 return "-";

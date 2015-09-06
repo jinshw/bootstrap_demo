@@ -40,9 +40,9 @@
             };
 
             var dataArr = [
-                ['', 'Kia', 'Nissan', 'Toyota', 'Honda'],
-                ['2013', 10, 11, 12, 13],
-                ['2014', 20, 11, 14, 13],
+                ['', 'Kia', 'Nissan', 'Toyota'],
+                ['2013', 10, 11, 12],
+                ['2014', 20, 11, 14],
                 ['2015', 30, 15, 12, 13]
             ];
 
@@ -71,11 +71,21 @@
             for(var i=0;i<ar.length;i++){
                 tempArr = ar[i];
                 for(var j=0;j<tempArr.length;j++){
+                    if(ar[i][j] == null){
 
+                    }else{
+                        if(i > maxI){
+                            maxI = i;
+                        }
+                        if(j > maxJ){
+                            maxJ = j;
+                        }
+                    }
                 }
 
             }
 
+            console.log(hot.getData(maxI,maxJ));
 
         });
 
