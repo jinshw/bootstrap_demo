@@ -1,0 +1,28 @@
+/**
+ * Created by JINSHW on 2015-09-08.
+ * main
+ */
+
+*{
+    padding: 0px;
+    margin: 0px;
+}
+html,body{
+    background: #ebebeb;
+}
+.main-header{
+    background: #373941;
+    width: 100%;
+    color: #f0f0f0;
+    left: 0;
+    top: 0;
+}
+.main-nav {
+    margin-top: 10px;
+}
+.nav-item>a{
+    font-size: 16px;
+    /*color: #ffffff;*/
+}
+
+

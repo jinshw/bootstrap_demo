@@ -3,11 +3,12 @@
  */
 require.config({
     paths: {
+        jquery:'../../lib/jquery/jquery-1.11.3.min',
         echarts:'../../lib/echarts-2.2.7/build/dist/echarts-all',
         bardemo:'echartsdemo/bardemo'
     },
     shim: {
-        'angular' : {'exports' : 'angular'},
+     /*   'angular' : {'exports' : 'angular'},
         'angularUiRoute': {
             deps:['angular'],
             'exports':'angularUiRoute'
@@ -16,31 +17,27 @@ require.config({
         'angularMocks': {
             deps:['angular'],
             'exports':'angular.mock'
-        }
+        }*/
     },
     priority: [
-        "angular"
+//        "angular"
     ]
 });
 
-//http://code.angularjs.org/1.2.1/docs/guide/bootstrap#overview_deferred-bootstrap
-window.name = "NG_DEFER_BOOTSTRAP!";
-
 require( [
-    'angular',
-    'app',
-    'routes'
-], function(angular, app, routes ) {//在function（）中echarts不能传递参数，因为echarts不符合AMD规范
+    'jquery',
+    'bardemo'
+], function($,bardemo) {//在function（）中echarts不能传递参数，因为echarts不符合AMD规范
     'use strict';
 
-    var $html = angular.element(document.getElementsByTagName('html')[0]);
+    var bar = document.getElementById('bar');
+    var line = document.getElementById('line');
+    var pie = document.getElementById('pie');
+    var scatter = document.getElementById('scatter');
 
-//    alert(document.getElementById('bar'));
-//    echartsdemo.barTU();
-
-    angular.element().ready(function() {
-        angular.resumeBootstrap([app['name']]);
-    });
-
+    bardemo.barTU(bar);
+    bardemo.lineTU(line);
+    bardemo.pieTU(pie);
+    bardemo.scatterTU(scatter);
 
 });
