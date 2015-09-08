@@ -34,6 +34,7 @@
 
         var ar;
         var hot;
+        var ecObj = new Object();
 
         require.config({
             paths:{
@@ -51,6 +52,8 @@
                 function (ec) {
                     // 基于准备好的dom，初始化echarts图表
                     var myChart = ec.init(document.getElementById('bar'));
+
+
 
                     var option = {
                         tooltip: {
@@ -83,17 +86,13 @@
                             }
                         ]
                     };
+                    ecObj.chart = myChart;
+                    ecObj.option = option;
+                    ecObj.chart.setOption(ecObj.option );
 
-                    // 为echarts对象加载数据
-                    myChart.setOption(option);
 
-
-                    //handsontable 数据初始化
+                    /*handsontable 数据初始化*/
                     var container = document.getElementById('basic_example');
-//                    var data = function () {
-//                        return Handsontable.helper.createSpreadsheetData(100, 12);
-//                    };
-
                     var dataArr = [
                         ['', 'Kia', 'Nissan', 'Toyota', 'Honda'],
                         ['2013', 10, 11, 12, 13],
@@ -102,7 +101,6 @@
                     ];
 
                     hot = new Handsontable(container, {
-//                data: data(),
                         data:dataArr,
 //                        minRows:5,
 //                        minCols:6,
@@ -117,35 +115,42 @@
                     ar = hot.getData();
                     console.log(ar);
 
+
+
+
+
                     //刷新按钮
                     $('#flash').click(function(){
                         //获取表格二维数组
-                        var dataArr = hot.getData();
-                        console.log(dataArr);
+                       /* var dataArr = hot.getData();
+                         console.log(dataArr);
 
-                        //获取最大下标
-                        var tempArr;
-                        var maxI = 0;
-                        var maxJ = 0;
-                        for(var i=0;i<dataArr.length;i++){
-                            tempArr = dataArr[i];
-                            for(var j=0;j<tempArr.length;j++){
-                                if(dataArr[i][j] == null){
+                         //获取最大下标
+                         var tempArr;
+                         var maxI = 0;
+                         var maxJ = 0;
+                         for(var i=0;i<dataArr.length;i++){
+                         tempArr = dataArr[i];
+                         for(var j=0;j<tempArr.length;j++){
+                         if(dataArr[i][j] == null){
 
-                                }else{
-                                    if(i > maxI){
-                                        maxI = i;
-                                    }
-                                    if(j > maxJ){
-                                        maxJ = j;
-                                    }
-                                }
-                            }
+                         }else{
+                         if(i > maxI){
+                         maxI = i;
+                         }
+                         if(j > maxJ){
+                         maxJ = j;
+                         }
+                         }
+                         }
 
-                        }
+                         }
 
-                        console.log(hot.getData(maxI,maxJ));
+                         console.log(hot.getData(maxI,maxJ));*/
 
+                        var tempObj = getMaxIndex(hot.getData());
+                        maxI = tempObj.maxI;
+                        maxJ = tempObj.maxJ;
 
 
                         var dataCol_1 =hot.getDataAtCol(0);
@@ -247,6 +252,37 @@
         );
 
 
+
+    //获取二维数组不为null最大I和J值
+    function getMaxIndex(dataArr){
+        var obj = new Object();
+        //获取表格二维数组
+//        var dataArr = hot.getData();
+        console.log(dataArr);
+
+        //获取最大下标
+        var tempArr;
+        obj.maxI = 0;
+        obj.maxJ = 0;
+        for(var i=0;i<dataArr.length;i++){
+            tempArr = dataArr[i];
+            for(var j=0;j<tempArr.length;j++){
+                if(dataArr[i][j] == null){
+
+                }else{
+                    if(i > obj.maxI){
+                        obj.maxI = i;
+                    }
+                    if(j > obj.maxJ){
+                        obj.maxJ = j;
+                    }
+                }
+            }
+
+        }
+//        console.log(hot.getData(maxI,maxJ));
+        return obj;
+    }
 
     </script>
 </body>
