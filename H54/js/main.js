@@ -4,6 +4,7 @@
 require.config({
     paths: {
         jquery:'../../lib/jquery/jquery-1.11.3.min',
+        bootstrap:'../../lib/bootstrap/3.3.4/dist/js/bootstrap.min',
         echarts:'../../lib/echarts-2.2.7/build/dist/echarts-all',
         bardemo:'echartsdemo/bardemo'
     },
@@ -18,6 +19,10 @@ require.config({
             deps:['angular'],
             'exports':'angular.mock'
         }*/
+        'bootstrap':{
+            deps:['jquery'],
+            exports:'bootstrap'
+        }
     },
     priority: [
 //        "angular"
@@ -26,7 +31,8 @@ require.config({
 
 require( [
     'jquery',
-    'bardemo'
+    'bardemo',
+    'bootstrap'
 ], function($,bardemo) {//在function（）中echarts不能传递参数，因为echarts不符合AMD规范
     'use strict';
 
