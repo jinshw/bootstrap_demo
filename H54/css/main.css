@@ -55,7 +55,8 @@ html,body{
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 -1px 0 rgba(0, 0, 0, 0.2) inset;
 }
 
-.edit-main .charts-main.charts-edit-area{
+.charts-edit-area{
+    position: relative;
 }
 
 .charts-content{
@@ -71,11 +72,83 @@ html,body{
 }
 
 .charts-tools-main{
+    /*
+    z-index: 5;*/
     left: 0;
-    opacity: 0;
+    opacity: 1;
     padding: 20px 20px 0 14px;
-    position: absolute;
-    top: -52px;
     transition: visibility 0s ease-in-out 0.15s, opacity 0.15s ease-in-out 0s;
-    z-index: 5;
+    top: -52px;
+    position: absolute;
+
+}
+.charts-tools-content{
+    background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 0 12px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.charts-tools-content .ctc-btn{
+
+    -moz-user-select: none;
+    color: #f0f0f0;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: normal;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 6px;
+    text-align: center;
+}
+
+.cpt-chtedt{
+    color: #f0f0f0;
+    background:#373941 none repeat scroll 0 0;
+    width: 660px;
+    height: 2000px;
+    position: fixed;
+    top: 47px;
+    margin: 10px 0 0 0;
+    opacity: 0;
+    z-index: -1;
+
+}
+.cpt-chtedt .dtm-close-btn{
+    top: 10px;
+    right: 20px;
+    position: absolute;
+    z-index: 1;
+}
+
+.cpt-chtedt .dtm-tabh{
+    height: 100%;
+    position: relative;
+}
+.cpt-chtedt .dtm-tabh-h {
+    margin-left: 50px;
+    position: relative;
+}
+.cpt-chtedt .dtm-tabh-hi {
+    background: #373941 none repeat scroll 0 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    cursor: pointer;
+    float: left;
+    height: 44px;
+    line-height: 44px;
+    margin: 0 5px;
+    padding: 0 14px;
+    position: relative;
+    text-align: center;
+}
+ol, ul {
+    list-style: outside none none;
+}
+.cpt-chtedt .dtm-tabh-coni {
+    top:44px;
+    position: absolute;
 }

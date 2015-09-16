@@ -46,4 +46,15 @@ require( [
     bardemo.pieTU(pie);
     bardemo.scatterTU(scatter);
 
+    var dedit = $(".charts-tools-dedit");
+    console.log(dedit[0].tagName);
+
+    dedit[0].addEventListener("click",function(){
+       console.log("点击数据编辑.....");
+       console.log(dedit[0].getAttribute("data-cpt"));
+
+       $(".edit-main").css("margin-left","660px");
+       $(".cpt-chtedt").css({"opacity":"1","z-index":"1010"});
+    });
+
 });

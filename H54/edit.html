@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="../lib/handsontable-0.17.0/dist/handsontable.full.min.css"/>
     <link rel="stylesheet" href="css/main.css"/>
 
+    <style>
+        .main{
+            margin: 0px;
+        }
+    </style>
 </head>
 <body>
 <!--<div  class="container">
@@ -17,7 +22,7 @@
     <div id="scatter" class="tu"></div>
 </div>-->
 <!-- start header -->
-<div class="container">
+<div class="main">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -80,11 +85,11 @@
                     </div>
                     <div class="charts-tools-main">
                         <div class="charts-tools-content">
-                            <div class="">拖拽</div>
-                            <div class="">数据编辑</div>
-                            <div class="">参考调整</div>
-                            <div class="">显示代码</div>
-                            <div class="">删除</div>
+                            <div class="ctc-btn">拖拽</div>
+                            <div class="ctc-btn charts-tools-dedit" data-cpt="name:'jinshw',type:'button'">数据编辑</div>
+                            <div class="ctc-btn">参考调整</div>
+                            <div class="ctc-btn">显示代码</div>
+                            <div class="ctc-btn">删除</div>
                         </div>
                     </div>
                 </div>
@@ -95,6 +100,19 @@
                 <div id="scatter" class="charts-content" ></div>
             </div>
 
+        </div>
+    </div>
+
+    <div class="cpt-chtedt">
+        <div class="btn btn-primary dtm-close-btn" data-cpt="">关闭</div>
+        <div class="dtm-tabh">
+            <ul class="dtm-tabh-h">
+                <li class="dtm-tabh-hi ">数据编辑</li>
+                <li class="dtm-tabh-hi ">参数调整</li>
+            </ul>
+            <div class="dtm-conh-data-editor dtm-tabh-coni" style="width: 660px;height: 1000px;background-color: #008000;">
+
+            </div>
         </div>
     </div>
 </div>
