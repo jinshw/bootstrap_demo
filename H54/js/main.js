@@ -6,6 +6,7 @@ require.config({
         jquery:'../../lib/jquery/jquery-1.11.3.min',
         bootstrap:'../../lib/bootstrap/3.3.4/dist/js/bootstrap.min',
         echarts:'../../lib/echarts-2.2.7/build/dist/echarts-all',
+        handsontable:'../../lib/handsontable-0.17.0/dist/handsontable.full.min',
         bardemo:'echartsdemo/bardemo'
     },
     shim: {
@@ -32,8 +33,9 @@ require.config({
 require( [
     'jquery',
     'bardemo',
-    'bootstrap'
-], function($,bardemo) {//在function（）中echarts不能传递参数，因为echarts不符合AMD规范
+    'bootstrap',
+    'handsontable'
+], function($,bardemo,handsontable) {//在function（）中echarts不能传递参数，因为echarts不符合AMD规范
     'use strict';
 
     var bar = document.getElementById('bar');
@@ -56,5 +58,51 @@ require( [
        $(".edit-main").css("margin-left","660px");
        $(".cpt-chtedt").css({"opacity":"1","z-index":"1010"});
     });
+
+
+    $("#dtm-close-btn").click(function(){
+        $(".edit-main").css("margin-left","0px");
+        $(".cpt-chtedt").css({"opacity":"0","z-index":"-1010"});
+    });
+
+
+
+    //handsontable 区域
+    var ar;
+    var hot;
+    var ecObj = new Object();
+
+
+    /*handsontable 数据初始化*/
+    var container = document.getElementById('data-table');
+    var dataArr = [
+        ['', 'Kia', 'Nissan', 'Toyota', 'Honda'],
+        ['2013', 10, 11, 12, 13],
+        ['2014', 20, 11, 14, 13],
+        ['2015', 30, 15, 12, 13]
+    ];
+
+    hot = new Handsontable(container, {
+        data:dataArr,
+                        minRows:20,
+                        minCols:12,
+//                        height: 396,
+        width: 660,
+        height: 800,
+
+        colHeaders: true,
+        rowHeaders: true,
+        stretchH: 'all',
+        columnSorting: true,
+        contextMenu: true
+    });
+
+    ar = hot.getData();
+    console.log(ar);
+
+
+
+
+
 
 });

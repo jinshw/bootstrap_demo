@@ -152,3 +152,18 @@ ol, ul {
     top:44px;
     position: absolute;
 }
+
+
+
+.dtm-handsontable {
+    background: #fff none repeat scroll 0 0;
+    bottom: 10px;
+    color: #333;
+    font-family: Verdana,Helvetica,Arial,FreeSans,sans-serif;
+    font-size: 12px;
+    left: 0px;
+    overflow: visible;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
