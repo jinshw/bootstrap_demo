@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="../lib/bootstrap/3.3.4/dist/css/bootstrap.min.css"/>
     <script type="text/javascript" src="../lib/jquery/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="../lib/bootstrap/3.3.4/dist/js/bootstrap.min.js"></script>
+
+    <style>
+
+        .dtm-tab0 {
+            bottom: 10px;
+            left: 0;
+            overflow: hidden;
+            /*position: absolute;*/
+            right: 0;
+            top: 10px;
+            width: 80px;
+        }
+    </style>
 </head>
 <body>
 <div class="site-topbar">
@@ -36,6 +49,47 @@
 </div>
 <div class="site-header container"></div>
 <div class="site-footer"></div>
+
+<hr>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addEcharts">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addEcharts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">选择图表模板</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <ul class="nav nav-pills nav-stacked dtm-tab0">
+                        <li role="presentation" class="active"><a href="#">折线图</a></li>
+                        <li role="presentation"><a href="#">柱状图</a></li>
+                        <li role="presentation"><a href="#">饼图</a></li>
+                        <li role="presentation"><a href="#">饼图</a></li>
+                        <li role="presentation"><a href="#">饼图</a></li>
+                        <li role="presentation"><a href="#">饼图</a></li>
+                        <li role="presentation"><a href="#">饼图</a></li>
+                        <li role="presentation"><a href="#">饼图</a></li>
+                        <li role="presentation"><a href="#">饼图</a></li>
+                        <li role="presentation"><a href="#">饼图</a></li>
+                        <li role="presentation"><a href="#">饼图</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

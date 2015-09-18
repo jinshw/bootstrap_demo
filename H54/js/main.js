@@ -34,8 +34,9 @@ require( [
     'jquery',
     'bardemo',
     'handsontable',
+    'bootstrap',
     'echarts'
-], function($,bardemo,handsontable) {//在function（）中echarts不能传递参数，因为echarts不符合AMD规范
+], function($,bardemo,handsontable,bootstrap) {//在function（）中echarts不能传递参数，因为echarts不符合AMD规范
     'use strict';
     var bar = document.getElementById('bar');
     var line = document.getElementById('line');
@@ -64,6 +65,11 @@ require( [
         $(".cpt-chtedt").css({"opacity":"0","z-index":"-1010"});
     });
 
+
+    //删除图表
+    $("div[data-op-type='remove']").click(function(){
+        $(this).parent().parent().parent(".charts-edit-area-main").remove();
+    });
 
 
     //handsontable 区域
@@ -107,97 +113,18 @@ require( [
         console.log("source=="+source);
             flashData(hot);
     })
-    ar = hot.getData();
-    console.log("aaaaaaaaaaaa");
+//    ar = hot.getData();
 
 
-//刷新按钮
+
+
+    //刷新
     function flashData(hot){
-        console.log("bbbbbbbbbbbbbb");
-        //获取表格二维数组
-        /* var dataArr = hot.getData();
-         console.log(dataArr);
-
-         //获取最大下标
-         var tempArr;
-         var maxI = 0;
-         var maxJ = 0;
-         for(var i=0;i<dataArr.length;i++){
-         tempArr = dataArr[i];
-         for(var j=0;j<tempArr.length;j++){
-         if(dataArr[i][j] == null){
-
-         }else{
-         if(i > maxI){
-         maxI = i;
-         }
-         if(j > maxJ){
-         maxJ = j;
-         }
-         }
-         }
-
-         }
-
-         console.log(hot.getData(maxI,maxJ));*/
-
-        var tempObj = getMaxIndex(hot.getData());
-        var maxI = tempObj.maxI;
-        var maxJ = tempObj.maxJ;
-
-
-        var dataCol_1 =hot.getDataAtCol(0);
-//                        var cols_1 = dataCol_1.slice(1,dataCol_1.length);
-        var cols_1 = dataCol_1.slice(1,maxI+1);
-        var cols_11 = cols_1.map(function(x){
-            if(x == null){
-                return "-";
-            }else{
-                return x;
-            }
-        });
-
-        var dataRow_1 = hot.getDataAtRow(0);
-//                        var row_1 = dataRow_1.slice(1,dataRow_1.length);
-        var row_1 = dataRow_1.slice(1,maxJ+1);
-        var row_11 = row_1.map(function(x){
-            if(x == null){
-                return "-";
-            }else{
-                return x;
-            }
-        });
+        var cols_11 = getECParameter(hot,"bar").cols_11;
+        var row_11 = getECParameter(hot,"bar").row_11;
 
         var series = new Array();
-        var temp;
-        var colsTemp;
-        for(var i=1;i<dataArr[0].length;i++){
-            temp = new Object();
-            colsTemp = hot.getDataAtCol(i);
-            if(colsTemp[0] == null || colsTemp[0] == undefined){
-                temp.name = "jinshw";
-            }else{
-                temp.name = colsTemp[0];
-            }
-
-            temp.type="bar";
-            if(hot.isEmptyCol(i)){//列为空
-                temp.data =  colsTemp.slice(1,colsTemp.length);
-            }else{
-                temp.data =  colsTemp.slice(1,colsTemp.length);
-            }
-            temp.data = temp.data.map(function(x){
-                if(x == null){
-                    return "0";
-                }else{
-                    return x;
-                }
-            });
-
-            series.push(temp);
-        }
-        console.log(row_11);
-        console.log(series);
+        series = getECParameter(hot,"bar").series;
 
         var option = {
             tooltip: {
@@ -205,12 +132,10 @@ require( [
             },
             legend: {
                 data:row_11
-//                                data:['销量','产量']
             },
             xAxis : [
                 {
                     type : 'category',
-//                                    data : ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子","手巾"]
                     data : cols_11
                 }
             ],
@@ -221,40 +146,92 @@ require( [
             ],
             series :
                 series
-            /*  [
-             {
-             "name":"销量",
-             "type":"bar",
-             "data":[5, 20, 40, 10, 10, 20]
-             },
-             {
-             "name":"产量",
-             "type":"bar",
-             "data":[5, 20, 40, 10, 10, 2]
-             }
-             ]*/
         };
-        console.log("ec22222==="+echarts);
-        console.log("option==="+option.series[0]);
-        console.log("bardemo==="+bardemo);
         var bar = document.getElementById('bar');
-
         bardemo.barTU(bar,option);
-
-//       var myChart = echarts.init(document.getElementById('data-table'));
-//        // 为echarts对象加载数据
-//        myChart.setOption(option);
-
     };
 
+    /**
+     * 获取Echarts参数
+     * hot:handsontable 对象
+     * dataArr:handsontable 数据
+     * reportTpe：类型：bar、必须为字符串
+     */
+    function getECParameter(hot,reportType){
+        var series = new Array();
+        var temp;
+        var colsTemp;
+        var dataArr = hot.getData();
+        for(var i=1;i<dataArr[0].length;i++){
+            temp = new Object();
+            colsTemp = hot.getDataAtCol(i);
+            if(colsTemp[0] == null || colsTemp[0] == undefined){
+                temp.name = "";
+            }else{
+                temp.name = colsTemp[0];
+            }
+
+//            temp.type="bar";
+            temp.type = reportType;
+            if(hot.isEmptyCol(i)){//列为空
+                temp.data =  null;
+            }else{
+                temp.data =  colsTemp.slice(1,colsTemp.length);
+            }
 
 
-    //获取二维数组不为null最大I和J值
+            if(temp.data != null){
+                temp.data = temp.data.map(function(x){
+                    if(x == null){
+                        return "0";
+                    }else{
+                        return x;
+                    }
+                });
+                series.push(temp);
+            }
+
+        }//end series
+
+        var tempObj = getMaxIndex(hot.getData());
+        var maxI = tempObj.maxI;
+        var maxJ = tempObj.maxJ;
+
+        var dataCol_1 =hot.getDataAtCol(0);
+        var cols_1 = dataCol_1.slice(1,maxI+1);
+        var cols_11 = cols_1.map(function(x){
+            if(x == null){
+                return "-";
+            }else{
+                return x;
+            }
+        });
+
+        var dataRow_1 = hot.getDataAtRow(0);
+        var row_1 = dataRow_1.slice(1,maxJ+1);
+        var row_11 = row_1.map(function(x){
+            if(x == null){
+                return "-";
+            }else{
+                return x;
+            }
+        });
+
+        var returnObj = new Object();
+        returnObj.series = series;
+        returnObj.row_11 = row_11;
+        returnObj.cols_11 = cols_11;
+
+        return returnObj;
+    }
+
+    /**
+     * 获取二维数组不为null最大I和J值
+     */
     function getMaxIndex(dataArr){
         var obj = new Object();
         //获取表格二维数组
 //        var dataArr = hot.getData();
-        console.log(dataArr);
 
         //获取最大下标
         var tempArr;
@@ -263,7 +240,7 @@ require( [
         for(var i=0;i<dataArr.length;i++){
             tempArr = dataArr[i];
             for(var j=0;j<tempArr.length;j++){
-                if(dataArr[i][j] == null){
+                if(dataArr[i][j] == null || dataArr[i][j] == ""){
 
                 }else{
                     if(i > obj.maxI){
@@ -274,9 +251,7 @@ require( [
                     }
                 }
             }
-
         }
-//        console.log(hot.getData(maxI,maxJ));
         return obj;
     }
 

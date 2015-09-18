@@ -40,7 +40,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">我的作品 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">添加图表</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#addEcharts">添加图表</a></li>
                     <li><a href="#">保存</a></li>
                     <li><a href="#">页面设置</a></li>
                     <li><a href="#">分享</a></li>
@@ -81,25 +81,28 @@
         <div class="charts-main">
             <div class="charts-edit-area">
                 <div class="charts-edit-area-main">
-                    <div id="bar" class="charts-content" >
-                    </div>
+                    <div id="bar" class="charts-content" ></div>
                     <div class="charts-tools-main">
                         <div class="charts-tools-content">
                             <div class="ctc-btn">拖拽</div>
                             <div class="ctc-btn charts-tools-dedit" data-cpt="name:'jinshw',type:'button'">数据编辑</div>
                             <div class="ctc-btn">参考调整</div>
                             <div class="ctc-btn">显示代码</div>
-                            <div class="ctc-btn">删除</div>
+                            <div class="ctc-btn" data-op-type="remove">删除</div>
                         </div>
                     </div>
                 </div>
 
-
-                <div id="line" class="charts-content" ></div>
-                <div id="pie" class="charts-content" ></div>
-                <div id="scatter" class="charts-content" ></div>
+                <div class="charts-edit-area-main">
+                    <div id="line" class="charts-content" ></div>
+                </div>
+                <div class="charts-edit-area-main">
+                    <div id="pie" class="charts-content" ></div>
+                </div>
+                <div class="charts-edit-area-main">
+                    <div id="scatter" class="charts-content" ></div>
+                </div>
             </div>
-
         </div>
     </div>
 
@@ -117,6 +120,41 @@
     </div>
 </div>
 
+
+
+<!-- Modal -->
+<div class="modal fade dtm-add-modal" id="addEcharts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">选择图表模板</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-pills nav-stacked dtm-add-tab">
+                    <li role="presentation" class="active"><a href="#">折线图</a></li>
+                    <li role="presentation"><a href="#">柱状图</a></li>
+                    <li role="presentation"><a href="#">饼图</a></li>
+                    <li role="presentation"><a href="#">饼图</a></li>
+                    <li role="presentation"><a href="#">饼图</a></li>
+                    <li role="presentation"><a href="#">饼图</a></li>
+                    <li role="presentation"><a href="#">饼图</a></li>
+                    <li role="presentation"><a href="#">饼图</a></li>
+                    <li role="presentation"><a href="#">饼图</a></li>
+                    <li role="presentation"><a href="#">饼图</a></li>
+                    <li role="presentation"><a href="#">饼图</a></li>
+                </ul>
+                <div style="width: 780px;height: 500px;background-color: red;float: left;">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div> <!--// 添加图表-->
 
 </body>
 <script data-main="js/main" src="js/require.js"></script>
