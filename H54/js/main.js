@@ -68,7 +68,11 @@ require( [
 
     //删除图表
     $("div[data-op-type='remove']").click(function(){
-        $(this).parent().parent().parent(".charts-edit-area-main").remove();
+//        $(this).parent().parent().parent(".charts-edit-area-main").remove();
+        var demo = "<div class='charts-edit-area-main'>" +
+            "</div>"
+        $(".charts-edit-area").append(demo);
+
     });
 
 
