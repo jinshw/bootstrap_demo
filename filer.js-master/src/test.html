@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>filer</title>
+</head>
+<script src="filer.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<body>
+<div>
+    <input type="text" id="fileName" name="" value="">
+    <button type="button" onclick="createFile()">createFile</button>
+</div>
+<hr>
+<div>
+    <input type="text" id="dirName" name="" value="">
+    <button type="button" onclick="createDir()">createDir</button>
+</div>
+<hr>
+<div>
+    <input type="text" id="listName" name="" value="">
+    <button type="button">getFileList</button>
+</div>
+<hr>
+<div>
+    <input type="text" id="url">
+    <textarea id="txt"></textarea>
+
+    <button onclick="appendText()">append Txt</button>
+</div>
+
+<script type="text/javascript">
+    var filer = new Filer();
+    $(document).ready(function(){
+        filer.init({persistent: true, size: 1024 * 1024}, function(fs) {
+            // filer.size == Filer.DEFAULT_FS_SIZE
+            // filer.isOpen == true
+            // filer.fs == fs
+        }, onError);
+    })
+
+    function createFile(){
+        var fileName = $("#fileName").val();
+        if(fileName == "" || typeof (fileName) == 'undefinded'){
+            fileName = "myFile.txt";
+        }
+//        filer.create(fileName);
+        filer.create(fileName, true, function(fileEntry) {
+            // fileEntry.fullPath == '/path/to/some/dir/myFile.txt'
+        }, onError);
+    }
+
+    function createDir(){
+        var dirName = $("#dirName").val();
+        if(dirName == "" || typeof (dirName) == 'undefinded'){
+            dirName = "myFile.txt";
+        }
+        filer.mkdir(dirName, false, function(dirEntry) {
+            // dirEntry.isDirectory == true
+            // dirEntry.name == 'myFolder'
+        }, onError);
+    }
+
+    function onError(e) {
+        console.log('Error' + e.name);
+    }
+
+    function appendText(){
+        var furl = $("#url").val();
+        var txt = $("#txt").val();
+        console.log(txt);
+
+        // Append to a file.
+        filer.write(furl, {data: txt, type: 'text/plain', append: true},
+                function(fileEntry, fileWriter) {
+
+                },
+                onError
+        );
+    }
+</script>
+</body>
+</html>
