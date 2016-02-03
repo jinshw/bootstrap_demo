@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{font-size:84%;}
+        .dustbin{width:100px; height:260px; line-height:1.4; background-color:gray; font-size:36px; font-family:"微软雅黑", "Yahei Mono"; text-align:center; text-shadow:-1px -1px #bbb; float:left;}
+        .dragbox{width:500px; padding-left:20px; float:left;}
+        .draglist{padding:10px; margin-bottom:5px; border:2px dashed #ccc; background-color:#eee; cursor:move;}
+        .draglist:hover{border-color:#cad5eb; background-color:#f0f3f9;}
+        .dragremind{padding-top:2em; clear:both;}
+    </style>
+
+    <script type="text/javascript" src="../lib/jquery/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<div class="dustbin"><br />垃<br />圾<br />箱</div>
+<div class="dragbox">
+    <div class="draglist2"  title="拖拽我" draggable="true"><div class="draglist" >列表1</div></div>
+    <div class="draglist2"  title="拖拽我" draggable="true"><div class="draglist" >列表2</div></div>
+    <div class="draglist2"  title="拖拽我" draggable="true"><div class="draglist" >列表3</div></div>
+    <div class="draglist2"  title="拖拽我" draggable="true"><div class="draglist" >列表4</div></div>
+    <div class="draglist2"  title="拖拽我" draggable="true"><div class="draglist" >列表5</div></div>
+    <div class="draglist2"  title="拖拽我" draggable="true"><div class="draglist" >列表6</div></div>
+    <div class="draglist setHere"  style="background-color: orange;display: none;">放在这里</div>
+</div>
+<div class="dragremind"></div>
+<script>
+    $(document).ready(function(){
+        var eleDustbin = $(".dustbin")[0], eleDrags = $(".draglist2"), lDrags = eleDrags.length,
+                eleRemind = $(".dragremind")[0], eleDrag = null;
+        for (var i=0; i<lDrags; i+=1) {
+            eleDrags[i].onselectstart = function() {
+                return false;
+            };
+            eleDrags[i].ondragstart = function(ev) {
+                console.log("ondragstart.....");
+
+
+//                console.log(ev.target);
+//                console.log($(this).children('.draglist').width());
+
+
+
+                ev.dataTransfer.effectAllowed = "move";
+                ev.dataTransfer.setData("text", ev.target.innerHTML);
+
+                var _dragImg = $(this).children('.draglist')[0];
+                var x = $(this).children('.draglist').width();
+                ev.dataTransfer.setDragImage(_dragImg, x/2, 0);
+                eleDrag = ev.target;
+                var cNode = document.importNode($(".setHere")[0],true);
+                $(cNode).attr('name','pHere');
+                $(cNode).css('display','block');
+                $(cNode).insertAfter($(this));
+                var node = this;
+                setTimeout(function(){
+//                    var cNode = $(".setHere")[0].closeNode(true);
+                    $(node).insertAfter(cNode);
+                    $(node).css('display','none');
+
+                },0);
+                return true;
+            };
+
+            eleDrags[i].ondrop = function(ev){
+
+            };
+            eleDrags[i].ondragend = function(ev) {
+//                console.log("ondragend.....");
+//                console.log("2222"+ev);
+//                $(".setHere").insertAfter(eleDrag);
+                $(eleDrag).insertAfter($(".setHere"));
+                $(eleDrag).css('display','block');
+                $(".setHere").css('display','none');
+                ev.dataTransfer.clearData("text");
+//                ev.dataTransfer.setData('text','');
+                eleDrag = null;
+                return false;
+            };
+
+            eleDrags[i].ondragenter = function(ev) {
+                console.log("ondragenter.....");
+               /* console.log(ev.target);
+                console.log($(this).width());
+                console.log($(this).height());
+                console.log("经过的对象到窗体左边距离:"+ ev.clientX);
+                console.log("经过的对象到窗体上边距离:"+ ev.clientY);
+                console.log("屏幕坐标X:"+ window.event.screenX);
+                console.log("屏幕坐标Y:"+ window.event.screenY);*/
+                return true;
+            };
+
+            eleDrags[i].ondragover = function(ev){
+                ev.preventDefault();
+                /*console.log("ondragover.....");
+                console.log(ev.target);
+                console.log($(this).width());
+                console.log($(this).height());
+                console.log("经过的对象到窗体左边距离:"+ ev.clientX);
+                console.log("经过的对象到窗体上边距离:"+ ev.clientY);
+                console.log("屏幕坐标X:"+ window.event.screenX);
+                console.log("屏幕坐标Y:"+ window.event.screenY);
+                console.log("上边Y:"+ $(this).offset().top);
+                console.log("高度height:"+ $(this).height());*/
+
+                var _clientY = ev.clientY;
+                var _top = $(this).offset().top;
+                var width = $(this).height();
+                var tempH = _clientY - _top;
+                if(tempH > (width/2)){
+                    if($(this).next().attr('name') != 'pHere'){
+                        var cNode = document.importNode($(".setHere")[0],true);
+                        $(cNode).css('display','block');
+                        $('.setHere').remove();
+                        $(cNode).insertAfter($(this));
+                    }
+                }else{
+                    var cNode = document.importNode($(".setHere")[0],true);
+                    $(cNode).css('display','block');
+                    $('.setHere').remove();
+                    $(cNode).insertBefore($(this));
+                }
+            }
+
+        }
+    /*    eleDustbin.ondragover = function(ev) {
+            console.log("ondragover.....");
+
+            console.log(ev.target);
+
+
+            ev.preventDefault();
+            return true;
+        };*/
+
+        /*eleDustbin.ondragenter = function(ev) {
+            console.log("ondragenter.....");
+            this.style.color = "#ffffff";
+            return true;
+        };
+        eleDustbin.ondrop = function(ev) {
+            console.log("ondrop.....");
+            if (eleDrag) {
+                eleRemind.innerHTML = '<strong>"' + eleDrag.innerHTML + '"</strong>remove rebes';
+                eleDrag.parentNode.removeChild(eleDrag);
+            }
+            this.style.color = "#000000";
+            return false;
+        };*/
+    });
+</script>
+
+
+
+</body>
+</html>

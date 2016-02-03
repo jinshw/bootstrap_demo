@@ -19,7 +19,7 @@
 <hr>
 <div>
     <input type="text" id="listName" name="" value="">
-    <button type="button">getFileList</button>
+    <button type="button" onclick="getList()">getFileList</button>
 </div>
 <hr>
 <div>
@@ -28,8 +28,41 @@
 
     <button onclick="appendText()">append Txt</button>
 </div>
-
+<hr>
+<div>
+    <input type="text" id="getFileContent">
+    <button onclick="getFileContent()">getContent</button>
+</div>
+<hr>
+<div>
+    <input type="text" id="rmFN">
+    <button onclick="rmFile()">rmFile</button>
+</div>
+<hr>
+<div>
+    <input type="text" id="mvName">
+    <input type="text" id="mvReName">
+    <button onclick="mvFile()">mvFile</button>
+</div>
+<hr>
+<div>
+    <button onclick="getId()">getParam</button>
+</div>
 <script type="text/javascript">
+
+    function getId(){
+        alert(window.location.search);
+        alert(getUrlParam('id'));
+    }
+
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+
+
     var filer = new Filer();
     $(document).ready(function(){
         filer.init({persistent: true, size: 1024 * 1024}, function(fs) {
@@ -39,14 +72,30 @@
         }, onError);
     })
 
+
+    function getList(){
+        filer.ls('/', function(entries) {
+            // entries in the root directory.
+            console.log(entries);
+            for(var i in entries){
+                if(entries[i].isFile){
+                    console.log(entries[i].name);
+                }
+
+            }
+        }, onError);
+
+    }
+
     function createFile(){
         var fileName = $("#fileName").val();
         if(fileName == "" || typeof (fileName) == 'undefinded'){
             fileName = "myFile.txt";
         }
 //        filer.create(fileName);
-        filer.create(fileName, true, function(fileEntry) {
+        filer.create(fileName, false, function(fileEntry) {
             // fileEntry.fullPath == '/path/to/some/dir/myFile.txt'
+            console.log("......");
         }, onError);
     }
 
@@ -71,13 +120,55 @@
         console.log(txt);
 
         // Append to a file.
-        filer.write(furl, {data: txt, type: 'text/plain', append: true},
+        filer.write(furl, {data: txt, type: 'text/plain', append: false},
                 function(fileEntry, fileWriter) {
 
                 },
                 onError
         );
     }
+
+    function getFileContent(){
+        var fileContent = $("#getFileContent").val();
+        // Pass a path.
+        filer.open(fileContent, function(file) {
+            // Use FileReader to read file.
+            console.log(file);
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                console.log(e);
+                console.log(".....");
+                console.log(reader.result);
+            }
+            reader.readAsText(file);
+            console.log(reader);
+            console.log(reader.result);
+        }, function(e){
+            console.log(e);
+        });
+    }
+
+    function rmFile(){
+        var rmFN = $("#rmFN").val();
+        filer.rm(rmFN, function() {
+
+        }, onError);
+    }
+
+    function mvFile(){
+        //rename
+        var _name = $("#mvName").val();
+        var _rename = $("#mvReName").val();
+console.log(filer);
+        filer.mv(_name, '.', _rename, function(fileEntry) {
+console.log(fileEntry);
+        }, onError);
+
+
+
+
+    }
+
 </script>
 </body>
 </html>
